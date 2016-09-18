@@ -1,0 +1,5 @@
+com\sentinel\login\Login.class
+com\sentinel\hibernate\HibernateUtil.class
+com\sentinel\persistance\User.class
+com\sentinel\hibernate\UserDTO.class
+com\sentinel\Application.class
