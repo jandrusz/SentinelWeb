@@ -1,11 +1,9 @@
 package com.sentinel.persistance;
 
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -13,8 +11,10 @@ import javax.persistence.Table;
 public class User {
 
     @Id
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+//    @GenericGenerator(name="users_id_seq" , strategy="increment")
     @Column(name = "id")
-    public String id;
+    public Integer id;
 
     @Column(name = "email")
     public String email;
@@ -28,7 +28,7 @@ public class User {
     @Column(name = "password")
     public String password;
 
-    public User(String id, String email, String firstName, String last_name, String password) {
+    public User(Integer id, String email, String firstName, String last_name, String password) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
