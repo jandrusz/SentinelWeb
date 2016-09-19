@@ -9,8 +9,8 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "children")
+public class Child {
 
     @Id
     @Column(name = "id")
@@ -28,14 +28,14 @@ public class User {
     @Column(name = "password")
     public String password;
 
-    public User(Integer id, String firstName, String last_name, String email, String password) {
+    public Child(Integer id, String firstName, String lastName, String email, String password) {
         this.id = id;
         this.firstName = firstName;
-        this.lastName = last_name;
+        this.lastName = lastName;
         this.email = email;
         this.password = password;
     }
 
-    public User() {
+    public Child() {
     }
 }

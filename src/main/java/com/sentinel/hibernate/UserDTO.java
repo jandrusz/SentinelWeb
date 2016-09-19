@@ -10,23 +10,37 @@ import java.util.List;
 
 public class UserDTO {
 
-    public static void addUser(Integer id, String firstName, String lastName, String email, String password) throws HibernateException {
+    public static JSONObject addUser(Integer id, String firstName, String lastName, String email, String password) {
 
+        JSONObject obj = new JSONObject();
         Transaction tx = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            tx = session.beginTransaction();
-            User user = new User(id, firstName, lastName, email, password);
-            session.save(user);
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) tx.rollback();
-            e.printStackTrace();
+        if (!isEmailInDatabase(email)) {
+            try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+                tx = session.beginTransaction();
+                User user = new User(id, firstName, lastName, email, password);
+                session.save(user);
+                tx.commit();
+                obj.put("success", "Zarejestrowano pomyślnie, możesz się zalogować.");
+            } catch (HibernateException e) {
+                if (tx != null) tx.rollback();
+                obj.put("failure", "Nie udało się zarejestrować.");
+            }
+        } else {
+            obj.put("failure", "Niepowodzenie, podany email już istnieje w bazie danych.");
         }
+        return obj;
     }
 
+    public static boolean isEmailInDatabase(String email) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        String hql = "FROM User where email = '" + email + "'";
+        List results = session.createQuery(hql)
+                .list();
+        session.close();
+        return results.size() > 0;
+    }
 
-    public static User checkUser(String email, String password) throws HibernateException {
-
+    public static User getUser(String email, String password) {
         User user;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             String hql = "FROM User where email = '" + email + "' and password = '" + password + "'";
@@ -39,12 +53,11 @@ public class UserDTO {
         return user;
     }
 
-    public static JSONObject getUser(String email, String password) {
+    public static JSONObject createJsonResponseFromRequest(String email, String password) {
         JSONObject obj = new JSONObject();
         JSONObject finalObj = new JSONObject();
-
         try {
-            User user = UserDTO.checkUser(email, password);
+            User user = UserDTO.getUser(email, password);
             obj.put("id", user.id.toString().trim());
             obj.put("firstName", user.firstName.trim());
             obj.put("lastName", user.lastName.trim());
@@ -56,7 +69,6 @@ public class UserDTO {
             return finalObj;
         }
         return finalObj;
-
     }
 
 }

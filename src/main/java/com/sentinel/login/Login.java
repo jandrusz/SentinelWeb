@@ -14,6 +14,6 @@ public class Login {
     @Produces("application/json")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public JSONObject logIn(@RequestParam("email") String email, @RequestParam("password") String password) {
-        return UserDTO.getUser(email, password);
+        return UserDTO.createJsonResponseFromRequest(email, password);
     }
 }
