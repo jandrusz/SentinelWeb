@@ -1,5 +1,10 @@
+com\sentinel\persistance\User.class
+com\sentinel\persistance\Monitor.class
+com\sentinel\hibernate\UserDTO.class
 com\sentinel\login\Login.class
 com\sentinel\hibernate\HibernateUtil.class
-com\sentinel\persistance\User.class
-com\sentinel\hibernate\UserDTO.class
+com\sentinel\hibernate\MonitorDTO.class
+com\sentinel\register\Register.class
+com\sentinel\persistance\Child.class
 com\sentinel\Application.class
+com\sentinel\login\userPanel\UserPanel.class
