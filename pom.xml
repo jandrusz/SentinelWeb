@@ -5,7 +5,7 @@
   <artifactId>SentinelWeb</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>SentinelWeb Maven Webapp</name>
+  <name>SentinelWeb</name>
   <url>http://maven.apache.org</url>
     <parent>
         <groupId>org.springframework.boot</groupId>

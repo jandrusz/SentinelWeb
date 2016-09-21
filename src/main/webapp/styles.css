@@ -1,0 +1,133 @@
+div.tytul {
+    
+	color: #7CB9E8;
+	font-family: Comic Sans;
+    font-size: 500%;
+	text-align: center;
+}
+
+div.podtytul {
+    
+	color: #7CB9E8;
+	font-family: Comic Sans;
+    font-size: 150%;
+	text-align: center;
+}
+
+div.tekst {
+    
+	line-height: 1cm;
+	color: #7CB9E8;
+	font-family: Comic Sans;
+    font-size: 150%;
+	text-align: center;
+}
+
+div.tekst2 {
+    
+	line-height: 1cm;
+	color: white;
+	font-family: Comic Sans;
+    font-size: 150%;
+	text-align: center;
+}
+
+#map {
+	position: absolute; 
+	
+	left: 60%; 
+	top: 15%;
+	
+    width: 500px;
+    height: 400px;
+      }
+
+h4{color: #7CB9E8;
+	font-family: Comic Sans;
+    font-size: 200%;
+	text-align: center;
+	
+	
+}
+
+body { 
+	color:white;
+	background-image: url(tlo.png); 
+	//background-color: lightgray;
+	background-size:cover;
+} 
+
+p {
+    text-align:center;
+}
+
+table.logowanie{
+	color: white;
+	text-align: center;
+	border: 1 ;
+	margin: 0 auto;
+}
+
+table.panel_uzytkownika {
+	
+	border="0";
+	align="right";
+	cellpadding="10px"; 
+	
+}
+
+#harmonogram {
+
+  overflow: auto;
+  margin-left: 15%;
+  position: absolute;
+  top: 15%;
+  left: 0%; 
+  width: 30%;
+  height: 60%; 
+  font-weight: bold;
+  color: #def;
+  background-color: #27c;
+  border: 3px double #9ce;
+	
+}
+
+ul, ul li {
+
+	display: block;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+ul {
+	position: absolute;
+	top: 15%;
+	left:2%;
+	width: 10%;
+	padding: 2px 2px 1px 2px;
+	background-color: #9ce;
+	border: 3px double #28e;
+}
+
+ul li {
+	border-bottom: 1px solid #9ce;
+}
+
+ul a:link, ul a:visited {
+	display: block;
+	width: 82%;
+	text-decoration: none;
+	padding: 7px;
+	font-weight: bold;
+	background-color: #27c;
+	color: #def;
+	border-left: 10px solid #25b;
+}
+
+ul a:hover {
+	width: 70%;
+	background-color: #28e;
+	color: #fff;
+	border-left: 20px solid #26d;
+}
