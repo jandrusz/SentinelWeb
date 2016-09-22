@@ -43,7 +43,7 @@ public class UserDTO {
     public static User getUser(String email, String password) {
         User user;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            String hql = "FROM User where email = '" + email + "' and password = '" + password + "'";
+            String hql = "from User where email = '" + email + "' and password = '" + password + "'";
             List results = session.createQuery(hql)
                     .list();
             user = (User) results.get(0);
