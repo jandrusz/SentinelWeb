@@ -2,6 +2,7 @@ package com.sentinel.login.userPanel;
 
 
 import com.sentinel.hibernate.MonitorDTO;
+import com.sentinel.hibernate.ScheduleDTO;
 import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,7 +23,7 @@ public class UserPanel {
     @Produces("application/json")
     @RequestMapping(value = "/schedule", method = RequestMethod.GET)
     public JSONObject getSchedule(@RequestParam("idChild") String idChild, @RequestParam("idUser") String idUser) {
-        return new JSONObject();
+        return ScheduleDTO.getSchedule(idChild,idUser);
     }
 
 
