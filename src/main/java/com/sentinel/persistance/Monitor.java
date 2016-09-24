@@ -1,6 +1,7 @@
 package com.sentinel.persistance;
 
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

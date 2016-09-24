@@ -18,4 +18,12 @@ public class UserPanel {
     public JSONObject getChildren(@RequestParam("email") String email) {
         return MonitorDTO.getChildrenByUserEmail(email);
     }
+
+    @Produces("application/json")
+    @RequestMapping(value = "/schedule", method = RequestMethod.GET)
+    public JSONObject getSchedule(@RequestParam("idChild") String idChild, @RequestParam("idUser") String idUser) {
+        return new JSONObject();
+    }
+
+
 }
