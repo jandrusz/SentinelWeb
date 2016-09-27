@@ -1,15 +1,46 @@
-<!doctype html>
-<html ng-app="demo">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01/EN"
+        "http://www.w3.org/TR/html14/strict.dtd">
+
+<html lang="pl-PL">
+
 <head>
-	<title>Sentinel Web</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-	<script src="hello.js"></script>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" >
+    <link rel="stylesheet" href="resources/styles.css">
 </head>
 
 <body>
-<div ng-controller="Hello">
-	<p>First name: {{user.firstName}}</p>
-	<p>Email: {{user.email}}</p>
-</div>
+
+
+<div class="tytul">Sentinel</div>
+<div class="podtytul">System nazdzoru członków rodziny</div>
+
+
+<table class="logowanie">
+    <tr>
+        <td>
+            <form action="logowanie.php" method="post">
+                <b>Login:</b></br>
+                <input name="name" type="text" size="40">
+                </br>
+                <b>Hasło:</b></br>
+                <input name="password" type="text" size="40">
+                </br>
+                </br>
+                <input type="submit" name="submit" value="Zaloguj">
+            </form>
+    <tr>
+        <td>
+            <form action="rejestracja.html">
+                <input type="submit" name="submit" value="Zarejestruj">
+            </form>
+        </td>
+    </tr>
+    </td>
+    </tr>
+
+</table>
+
+
+
 </body>
 </html>

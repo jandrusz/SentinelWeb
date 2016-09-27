@@ -12,7 +12,7 @@ public class MonitorDTO {
 
     public static JSONObject getChildrenByUserEmail(String email) {
 
-        JSONObject obj = new JSONObject();
+        JSONObject obj2 = new JSONObject();
         JSONObject finalObj = new JSONObject();
         Child child;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -37,9 +37,17 @@ public class MonitorDTO {
                     List childNameResult = session.createQuery(childName)
                             .list();
                     child = (Child) childNameResult.get(0);
-                    obj.put("firstName" + i, child.firstName.trim());
+                    JSONObject obj = new JSONObject();
+                    obj.put("id", child.id.toString());
+                    obj.put("firstName", child.firstName);
+                    obj.put("lastName", child.lastName);
+                    obj.put("email", child.email);
+                    obj.put("password", child.password);
+                    obj.put("idSchedule", child.idSchedule.toString());
+                    obj2.put("child" + i, obj);
+
                 }
-                finalObj.put("success", obj);
+                finalObj.put("success", obj2);
                 return finalObj;
             }
         } catch (HibernateException e) {

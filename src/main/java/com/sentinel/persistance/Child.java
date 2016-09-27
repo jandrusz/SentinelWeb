@@ -28,12 +28,16 @@ public class Child {
     @Column(name = "password")
     public String password;
 
-    public Child(Integer id, String firstName, String lastName, String email, String password) {
+    @Column(name = "id_schedule")
+    public Integer idSchedule;
+
+    public Child(Integer id, String firstName, String lastName, String email, String password, Integer idSchedule) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.idSchedule = idSchedule;
     }
 
     public Child() {

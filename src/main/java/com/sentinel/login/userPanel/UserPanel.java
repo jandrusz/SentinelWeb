@@ -21,7 +21,7 @@ public class UserPanel {
     }
 
     @Produces("application/json")
-    @RequestMapping(value = "/schedule", method = RequestMethod.GET)
+    @RequestMapping(value = "/schedule", method = RequestMethod.POST)
     public JSONObject getSchedule(@RequestParam("idChild") String idChild, @RequestParam("idUser") String idUser) {
         return ScheduleDTO.getSchedule(idChild,idUser);
     }
