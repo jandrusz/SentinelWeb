@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5e4336fc-d414-41c1-b20b-fc1a1f39fc06" name="Default" comment="">
+    <list default="true" id="5e4336fc-d414-41c1-b20b-fc1a1f39fc06" name="Default" comment="Zwracanie mockowego JSONa dla zapytan o harmonogram">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/hello.js" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/index.html" afterPath="" />
@@ -1013,7 +1013,7 @@
       <workItem from="1474998125816" duration="11000" />
       <workItem from="1474998261150" duration="1572000" />
       <workItem from="1475003591175" duration="1303000" />
-      <workItem from="1475005223267" duration="503000" />
+      <workItem from="1475005223267" duration="476000" />
     </task>
     <task id="LOCAL-00001" summary="Dodanie rejestracji i poprawienie logowania">
       <created>1474232919781</created>
@@ -1068,7 +1068,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83146000" />
+    <option name="totallyTimeSpent" value="83119000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1128,8 +1128,7 @@
     <MESSAGE value="Dodanie odczytu dzieci z bazy danych na podstawie emaila" />
     <MESSAGE value="Dodanie banera, wow wow" />
     <MESSAGE value="Zwracanie mockowego JSONa dla zapytan o harmonogram" />
-    <MESSAGE value="Dodanie gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="Dodanie gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="Zwracanie mockowego JSONa dla zapytan o harmonogram" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
