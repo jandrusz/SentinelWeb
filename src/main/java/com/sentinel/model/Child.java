@@ -1,4 +1,4 @@
-package com.sentinel.persistance;
+package com.sentinel.model;
 
 import lombok.Data;
 
@@ -9,8 +9,8 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "children")
+public class Child {
 
     @Id
     @Column(name = "id")
@@ -28,14 +28,18 @@ public class User {
     @Column(name = "password")
     public String password;
 
-    public User(Integer id, String firstName, String last_name, String email, String password) {
+    @Column(name = "id_schedule")
+    public Integer idSchedule;
+
+    public Child(Integer id, String firstName, String lastName, String email, String password, Integer idSchedule) {
         this.id = id;
         this.firstName = firstName;
-        this.lastName = last_name;
+        this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.idSchedule = idSchedule;
     }
 
-    public User() {
+    public Child() {
     }
 }

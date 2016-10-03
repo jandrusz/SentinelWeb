@@ -1,6 +1,6 @@
 package com.sentinel.hibernate;
 
-import com.sentinel.persistance.Child;
+import com.sentinel.model.Child;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.json.simple.JSONObject;

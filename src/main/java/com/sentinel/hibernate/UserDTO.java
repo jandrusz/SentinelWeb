@@ -1,6 +1,6 @@
 package com.sentinel.hibernate;
 
-import com.sentinel.persistance.User;
+import com.sentinel.model.User;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

@@ -1,30 +1,30 @@
 package com.sentinel.hibernate;
 
+import com.sentinel.model.Schedule;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.json.simple.JSONObject;
+
+import java.util.List;
 
 public class ScheduleDTO {
 
 
     public static JSONObject getSchedule(String idChild, String idUser) {
 
+        Schedule childSchedule;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
-        JSONObject obj = new JSONObject();
-        JSONObject obj2 = new JSONObject();
-        JSONObject finalObj = new JSONObject();
-//        finalObj.put("failure", "Jeszcze trzeba to zrobic");
-        obj.put("name","Szkola");
-        obj.put("timeStart","8:17");
-        obj.put("timeStop","15:09");
-        obj2.put("wpisHarmonogramu0",obj);
-        obj = new JSONObject();
-        obj.put("name","Kino");
-        obj.put("timeStart","18:23");
-        obj.put("timeStop","21:19");
-        obj2.put("wpisHarmonogramu1",obj);
-        finalObj.put("success", obj2);
-        return finalObj;
+            String childScheduleId = "from Schedule where idUser = '" + idUser + "'";
+            List childSchedules = session.createQuery(childScheduleId)
+                    .list();
 
+            childSchedule = (Schedule) childSchedules.get(0);
+            return ScheduleEntryDTO.getScheduleEntries(childSchedule);
+
+        } catch (HibernateException e) {
+            throw new HibernateException(e);
+        }
     }
-
 
 }
