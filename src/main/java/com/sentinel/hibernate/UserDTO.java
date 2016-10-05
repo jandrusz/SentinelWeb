@@ -31,7 +31,7 @@ public class UserDTO {
         return obj;
     }
 
-    public static boolean isEmailInDatabase(String email) {
+    static boolean isEmailInDatabase(String email) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         String hql = "FROM User where email = '" + email + "'";
         List results = session.createQuery(hql)
@@ -40,7 +40,7 @@ public class UserDTO {
         return results.size() > 0;
     }
 
-    public static User getUser(String email, String password) {
+    static User getUser(String email, String password) {
         User user;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             String hql = "from User where email = '" + email + "' and password = '" + password + "'";
@@ -58,11 +58,11 @@ public class UserDTO {
         JSONObject finalObj = new JSONObject();
         try {
             User user = UserDTO.getUser(email, password);
-            obj.put("id", user.id.toString().trim());
-            obj.put("firstName", user.firstName.trim());
-            obj.put("lastName", user.lastName.trim());
-            obj.put("email", user.email.trim());
-            obj.put("password", user.password.trim());
+            obj.put("id", user.id.toString());
+            obj.put("firstName", user.firstName);
+            obj.put("lastName", user.lastName);
+            obj.put("email", user.email);
+            obj.put("password", user.password);
             finalObj.put("success", obj);
         } catch (Exception e) {
             finalObj.put("failure", "Nie ma takiego użytkownika");

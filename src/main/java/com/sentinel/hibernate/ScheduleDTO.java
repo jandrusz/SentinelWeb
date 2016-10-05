@@ -10,12 +10,12 @@ import java.util.List;
 public class ScheduleDTO {
 
 
-    public static JSONObject getSchedule(String idChild, String idUser) {
+    public static JSONObject getSchedule(String idChild) {
 
         Schedule childSchedule;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
-            String childScheduleId = "from Schedule where idUser = '" + idUser + "'";
+            String childScheduleId = "from Schedule where idChild = '" + idChild + "'";
             List childSchedules = session.createQuery(childScheduleId)
                     .list();
 

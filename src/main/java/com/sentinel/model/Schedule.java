@@ -19,8 +19,8 @@ public class Schedule {
     @Column(name = "name")
     public String name;
 
-    @Column(name = "id_user")
-    public Integer idUser;
+    @Column(name = "id_child")
+    public Integer idChild;
 
 
 }

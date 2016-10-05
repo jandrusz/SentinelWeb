@@ -10,13 +10,15 @@ import java.util.List;
 
 public class ScheduleEntryDTO {
 
-    private static JSONObject finalObj = new JSONObject();
-    private static JSONObject obj2 = new JSONObject();
+    private static JSONObject finalObj;
+    private static JSONObject obj2;
 
     public static JSONObject getScheduleEntries(Schedule schedule) {
+        finalObj = new JSONObject();
+        obj2 = new JSONObject();
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
-            String scheduleEntries = "from ScheduleEntry where idUser = '" + schedule.idUser + "'";
+            String scheduleEntries = "from ScheduleEntry where idSchedule = '" + schedule.id + "'";
             List scheduleEntriesResults = session.createQuery(scheduleEntries)
                     .list();
 
@@ -40,11 +42,12 @@ public class ScheduleEntryDTO {
 
 
     private static void addScheduleEntryToJson(ScheduleEntry scheduleEntry, int i) {
-
         JSONObject obj = new JSONObject();
         obj.put("timeStart", scheduleEntry.timeStart);
         obj.put("timeStop", scheduleEntry.timeStop);
         obj.put("name", scheduleEntry.name);
+        obj.put("day", scheduleEntry.day);
+
         obj2.put("scheduleEntry" + i, obj);
     }
 

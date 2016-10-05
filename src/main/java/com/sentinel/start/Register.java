@@ -1,4 +1,4 @@
-package com.sentinel.register;
+package com.sentinel.start;
 
 import com.sentinel.hibernate.UserDTO;
 import org.json.simple.JSONObject;
