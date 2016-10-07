@@ -22,8 +22,8 @@ public class Child {
     @Column(name = "last_name")
     public String lastName;
 
-    @Column(name = "email")
-    public String email;
+    @Column(name = "login")
+    public String login;
 
     @Column(name = "password")
     public String password;
@@ -31,11 +31,11 @@ public class Child {
     @Column(name = "id_schedule")
     public Integer idSchedule;
 
-    public Child(Integer id, String firstName, String lastName, String email, String password, Integer idSchedule) {
+    public Child(Integer id, String firstName, String lastName, String login, String password, Integer idSchedule) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
+        this.login = login;
         this.password = password;
         this.idSchedule = idSchedule;
     }

@@ -22,17 +22,17 @@ public class User {
     @Column(name = "last_name")
     public String lastName;
 
-    @Column(name = "email")
-    public String email;
+    @Column(name = "login")
+    public String login;
 
     @Column(name = "password")
     public String password;
 
-    public User(Integer id, String firstName, String last_name, String email, String password) {
+    public User(Integer id, String firstName, String last_name, String login, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = last_name;
-        this.email = email;
+        this.login = login;
         this.password = password;
     }
 

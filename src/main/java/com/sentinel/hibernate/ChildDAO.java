@@ -9,17 +9,17 @@ import org.json.simple.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChildDTO {
+public class ChildDAO {
 
-    public static JSONObject addChild(Integer id, String firstName, String lastName, String email, String idUser) {
+    public static JSONObject bindUserToChild(Integer id, String firstName, String lastName, String login, String idUser) {
         JSONObject finalObj = new JSONObject();
         Transaction tx = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             tx = session.beginTransaction();
-            Child child = new Child(id, firstName, lastName, email, null, null);
+            Child child = new Child(id, firstName, lastName, login, null, null);
             session.save(child);
             tx.commit();
-            MonitorDTO.bindChildToParent(Integer.parseInt(idUser), ChildDTO.getChildId(email));
+            MonitorDAO.bindChildToParent(Integer.parseInt(idUser), ChildDAO.getChildId(login));
             finalObj.put("success", "Dodano dziecko.");
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
@@ -28,7 +28,7 @@ public class ChildDTO {
         return finalObj;
     }
 
-    public static JSONObject getChildrenByUserEmail(String idUser) {
+    public static JSONObject getUserChildrenByUserId(String idUser) {
 
         JSONObject obj2 = new JSONObject();
         JSONObject finalObj = new JSONObject();
@@ -36,7 +36,7 @@ public class ChildDTO {
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
-            Integer numberOfChildren = MonitorDTO.getNumberOfChildrenForUser(idUser);
+            Integer numberOfChildren = MonitorDAO.getNumberOfChildrenForUser(idUser);
 
             List<String> listOfUserIds = new ArrayList<>();
 
@@ -57,11 +57,10 @@ public class ChildDTO {
                     obj.put("id", child.id.toString());
                     obj.put("firstName", child.firstName);
                     obj.put("lastName", child.lastName);
-                    obj.put("email", child.email);
-                    obj.put("password", child.password);
-                    obj.put("idSchedule", child.idSchedule.toString());
+                    obj.put("login", child.login);
+                    obj.put("password", child.password == null ? "" : child.password);
+                    obj.put("idSchedule", child.idSchedule == null ? "" : child.idSchedule.toString());
                     obj2.put("child" + i, obj);
-
                 }
                 finalObj.put("success", obj2);
                 return finalObj;
@@ -74,8 +73,19 @@ public class ChildDTO {
 
     }
 
-    static Integer getChildId(String email) {
+    static Integer getChildId(String login) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            String hql = "select id FROM Child where login = '" + login + "'";
+            List results = session.createQuery(hql)
+                    .list();
+            return (Integer) results.get(0);
+        } catch (HibernateException e) {
+            throw new HibernateException(e);
+        }
+    }
 
+    //TODO gdy bedzie aplikacja dziecka
+    public static JSONObject getChildData(String login, String password){
         return null;
     }
 

@@ -8,16 +8,16 @@ import org.json.simple.JSONObject;
 
 import java.util.List;
 
-public class UserDTO {
+public class UserDAO {
 
-    public static JSONObject addUser(Integer id, String firstName, String lastName, String email, String password) {
+    public static JSONObject addUser(Integer id, String firstName, String lastName, String login, String password) {
 
         JSONObject obj = new JSONObject();
         Transaction tx = null;
-        if (!isEmailInDatabase(email)) {
+        if (!isloginInDatabase(login)) {
             try (Session session = HibernateUtil.getSessionFactory().openSession()) {
                 tx = session.beginTransaction();
-                User user = new User(id, firstName, lastName, email, password);
+                User user = new User(id, firstName, lastName, login, password);
                 session.save(user);
                 tx.commit();
                 obj.put("success", "Zarejestrowano pomyślnie, możesz się zalogować.");
@@ -26,24 +26,24 @@ public class UserDTO {
                 obj.put("failure", "Nie udało się zarejestrować.");
             }
         } else {
-            obj.put("failure", "Niepowodzenie, podany email już istnieje w bazie danych.");
+            obj.put("failure", "Niepowodzenie, podany login już istnieje w bazie danych.");
         }
         return obj;
     }
 
-    static boolean isEmailInDatabase(String email) {
+    private static boolean isloginInDatabase(String login) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        String hql = "FROM User where email = '" + email + "'";
+        String hql = "FROM User where login = '" + login + "'";
         List results = session.createQuery(hql)
                 .list();
         session.close();
         return results.size() > 0;
     }
 
-    static User getUser(String email, String password) {
+    private static User getUser(String login, String password) {
         User user;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            String hql = "from User where email = '" + email + "' and password = '" + password + "'";
+            String hql = "from User where login = '" + login + "' and password = '" + password + "'";
             List results = session.createQuery(hql)
                     .list();
             user = (User) results.get(0);
@@ -53,15 +53,15 @@ public class UserDTO {
         return user;
     }
 
-    public static JSONObject createJsonResponseFromRequest(String email, String password) {
+    public static JSONObject getUserData(String login, String password) {
         JSONObject obj = new JSONObject();
         JSONObject finalObj = new JSONObject();
         try {
-            User user = UserDTO.getUser(email, password);
+            User user = UserDAO.getUser(login, password);
             obj.put("id", user.id.toString());
             obj.put("firstName", user.firstName);
             obj.put("lastName", user.lastName);
-            obj.put("email", user.email);
+            obj.put("login", user.login);
             obj.put("password", user.password);
             finalObj.put("success", obj);
         } catch (Exception e) {

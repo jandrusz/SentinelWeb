@@ -8,12 +8,12 @@ import org.json.simple.JSONObject;
 
 import java.util.List;
 
-public class ScheduleEntryDTO {
+public class ScheduleEntryDAO {
 
     private static JSONObject finalObj;
     private static JSONObject obj2;
 
-    public static JSONObject getScheduleEntries(Schedule schedule) {
+    public static JSONObject getScheduleEntriesBySchedule(Schedule schedule) {
         finalObj = new JSONObject();
         obj2 = new JSONObject();
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -47,7 +47,6 @@ public class ScheduleEntryDTO {
         obj.put("timeStop", scheduleEntry.timeStop);
         obj.put("name", scheduleEntry.name);
         obj.put("day", scheduleEntry.day);
-
         obj2.put("scheduleEntry" + i, obj);
     }
 

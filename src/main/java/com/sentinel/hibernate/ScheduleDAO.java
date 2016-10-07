@@ -7,10 +7,10 @@ import org.json.simple.JSONObject;
 
 import java.util.List;
 
-public class ScheduleDTO {
+public class ScheduleDAO {
 
 
-    public static JSONObject getSchedule(String idChild) {
+    public static JSONObject getScheduleByChildId(String idChild) {
 
         Schedule childSchedule;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -20,7 +20,7 @@ public class ScheduleDTO {
                     .list();
 
             childSchedule = (Schedule) childSchedules.get(0);
-            return ScheduleEntryDTO.getScheduleEntries(childSchedule);
+            return ScheduleEntryDAO.getScheduleEntriesBySchedule(childSchedule);
 
         } catch (HibernateException e) {
             throw new HibernateException(e);
