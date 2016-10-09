@@ -73,7 +73,7 @@ public class ChildDAO {
 
     }
 
-    static Integer getChildId(String login) {
+    private static Integer getChildId(String login) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             String hql = "select id FROM Child where login = '" + login + "'";
             List results = session.createQuery(hql)
@@ -85,7 +85,7 @@ public class ChildDAO {
     }
 
     //TODO gdy bedzie aplikacja dziecka
-    public static JSONObject getChildData(String login, String password){
+    public static JSONObject getChildData(String login, String password) {
         return null;
     }
 

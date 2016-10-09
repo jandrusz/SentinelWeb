@@ -14,7 +14,7 @@ public class UserDAO {
 
         JSONObject obj = new JSONObject();
         Transaction tx = null;
-        if (!isloginInDatabase(login)) {
+        if (!isLoginInDatabase(login)) {
             try (Session session = HibernateUtil.getSessionFactory().openSession()) {
                 tx = session.beginTransaction();
                 User user = new User(id, firstName, lastName, login, password);
@@ -31,7 +31,7 @@ public class UserDAO {
         return obj;
     }
 
-    private static boolean isloginInDatabase(String login) {
+    private static boolean isLoginInDatabase(String login) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         String hql = "FROM User where login = '" + login + "'";
         List results = session.createQuery(hql)
