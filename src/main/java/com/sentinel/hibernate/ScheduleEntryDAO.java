@@ -1,5 +1,6 @@
 package com.sentinel.hibernate;
 
+import com.sentinel.enums.Day;
 import com.sentinel.model.Schedule;
 import com.sentinel.model.ScheduleEntry;
 import org.hibernate.HibernateException;
@@ -24,7 +25,7 @@ public class ScheduleEntryDAO {
 
             for (int i = 0; i < scheduleEntriesResults.size(); i++) {
                 ScheduleEntry scheduleEntry = (ScheduleEntry) scheduleEntriesResults.get(i);
-                addScheduleEntryToJson(scheduleEntry, i);
+                getScheduleEntry(scheduleEntry, i);
             }
 
             if (scheduleEntriesResults.size() == 0) {
@@ -41,7 +42,7 @@ public class ScheduleEntryDAO {
     }
 
 
-    private static void addScheduleEntryToJson(ScheduleEntry scheduleEntry, int i) {
+    private static void getScheduleEntry(ScheduleEntry scheduleEntry, int i) {
         JSONObject obj = new JSONObject();
         obj.put("timeStart", scheduleEntry.timeStart);
         obj.put("timeStop", scheduleEntry.timeStop);
@@ -50,4 +51,11 @@ public class ScheduleEntryDAO {
         obj2.put("scheduleEntry" + i, obj);
     }
 
+    //TODO tutaj dodanie wpisu do bazy danych
+    public static JSONObject addScheduleEntry(String name, String timeStart, String timeStop, String day, String idUser) {
+        finalObj = new JSONObject();
+        finalObj.put("success", "dodano wpis");
+
+        return finalObj;
+    }
 }

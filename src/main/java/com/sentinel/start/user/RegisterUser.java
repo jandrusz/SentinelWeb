@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class Register {
+public class RegisterUser {
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
     public JSONObject register(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,
                                @RequestParam("login") String login, @RequestParam("password") String password) {
         return UserDAO.addUser(0, firstName, lastName, login, password);

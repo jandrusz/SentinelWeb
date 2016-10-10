@@ -53,11 +53,17 @@ public class UserDAO {
         return user;
     }
 
+    public static boolean checkIfCredentialsAreCorrect(String login, String password) {
+        if (getUser(login, password) != null)
+            return true;
+        return false;
+    }
+
     public static JSONObject getUserData(String login, String password) {
         JSONObject obj = new JSONObject();
         JSONObject finalObj = new JSONObject();
         try {
-            User user = UserDAO.getUser(login, password);
+            User user = getUser(login, password);
             obj.put("id", user.id.toString());
             obj.put("firstName", user.firstName);
             obj.put("lastName", user.lastName);

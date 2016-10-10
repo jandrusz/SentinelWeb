@@ -11,22 +11,6 @@ import java.util.List;
 
 public class ChildDAO {
 
-    public static JSONObject bindUserToChild(Integer id, String firstName, String lastName, String login, String idUser) {
-        JSONObject finalObj = new JSONObject();
-        Transaction tx = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            tx = session.beginTransaction();
-            Child child = new Child(id, firstName, lastName, login, null, null);
-            session.save(child);
-            tx.commit();
-            MonitorDAO.bindChildToParent(Integer.parseInt(idUser), ChildDAO.getChildId(login));
-            finalObj.put("success", "Dodano dziecko.");
-        } catch (HibernateException e) {
-            if (tx != null) tx.rollback();
-            finalObj.put("failure", "Nie udało się dodać dziecka.");
-        }
-        return finalObj;
-    }
 
     public static JSONObject getUserChildrenByUserId(String idUser) {
 
@@ -73,7 +57,7 @@ public class ChildDAO {
 
     }
 
-    private static Integer getChildId(String login) {
+    public static Integer getChildId(String login) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             String hql = "select id FROM Child where login = '" + login + "'";
             List results = session.createQuery(hql)
@@ -84,9 +68,71 @@ public class ChildDAO {
         }
     }
 
-    //TODO gdy bedzie aplikacja dziecka
     public static JSONObject getChildData(String login, String password) {
-        return null;
+        JSONObject obj = new JSONObject();
+        JSONObject finalObj = new JSONObject();
+        try {
+            Child child = getChild(login, password);
+            obj.put("id", child.id.toString());
+            obj.put("firstName", child.firstName);
+            obj.put("lastName", child.lastName);
+            obj.put("login", child.login);
+            obj.put("password", child.password);
+            finalObj.put("success", obj);
+        } catch (Exception e) {
+            finalObj.put("failure", "Nie ma takiego użytkownika");
+            return finalObj;
+        }
+        return finalObj;
+    }
+
+    private static Child getChild(String login, String password) {
+        Child child;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            String hql = "from Child where login = '" + login + "' and password = '" + password + "'";
+            List results = session.createQuery(hql)
+                    .list();
+            child = (Child) results.get(0);
+        } catch (HibernateException e) {
+            throw new HibernateException(e);
+        }
+        return child;
+    }
+
+    public static boolean checkIfCredentialsAreCorrect(String login, String password) {
+        if (getChild(login, password) != null)
+            return true;
+        return false;
+    }
+
+    public static JSONObject addChild(Integer id, String firstName, String lastName, String login, String password) {
+
+        JSONObject obj = new JSONObject();
+        Transaction tx = null;
+        if (!isLoginInDatabase(login)) {
+            try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+                tx = session.beginTransaction();
+                Child child = new Child(id, firstName, lastName, login, password, null);
+                session.save(child);
+                tx.commit();
+                obj.put("success", "Zarejestrowano pomyślnie, możesz się zalogować.");
+            } catch (HibernateException e) {
+                if (tx != null) tx.rollback();
+                obj.put("failure", "Nie udało się zarejestrować.");
+            }
+        } else {
+            obj.put("failure", "Niepowodzenie, podany login już istnieje w bazie danych.");
+        }
+        return obj;
+    }
+
+    private static boolean isLoginInDatabase(String login) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        String hql = "FROM Child where login = '" + login + "'";
+        List results = session.createQuery(hql)
+                .list();
+        session.close();
+        return results.size() > 0;
     }
 
 }

@@ -23,9 +23,10 @@ public class UserPanel {
         return ChildDAO.getUserChildrenByUserId(idUser);
     }
 
+    //TODO dodanie sprawdzania czy dany rodzic jest juz sparowany z dzieckiem
     @RequestMapping(value = "/children/addChild", method = RequestMethod.POST)
-    public JSONObject addChild(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("login") String login, @RequestParam("idUser") String idUser) {
-        return ChildDAO.bindUserToChild(0, firstName, lastName, login, idUser);
+    public JSONObject addChild(@RequestParam("login") String login, @RequestParam("password") String password, @RequestParam("idUser") String idUser) {
+        return MonitorDAO.bindChildToParent(login, password, idUser);
     }
 
     @RequestMapping(value = "/children/removeChild", method = RequestMethod.POST)
