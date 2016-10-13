@@ -1,6 +1,7 @@
 package com.sentinel.start.user.userPanel.schedule;
 
 import com.sentinel.enums.Day;
+import com.sentinel.hibernate.ScheduleDAO;
 import com.sentinel.hibernate.ScheduleEntryDAO;
 import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,4 +18,5 @@ public class Schedule {
                                        @RequestParam("day") String day, @RequestParam("idUser") String idUser ) {
         return ScheduleEntryDAO.addScheduleEntry(name, timeStart, timeStop, day, idUser);
     }
+
 }

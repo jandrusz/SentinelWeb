@@ -14,12 +14,12 @@ public class ScheduleEntryDAO {
     private static JSONObject finalObj;
     private static JSONObject obj2;
 
-    public static JSONObject getScheduleEntriesBySchedule(Schedule schedule) {
+    public static JSONObject getScheduleEntriesByScheduleId(String idSchedule) {
         finalObj = new JSONObject();
         obj2 = new JSONObject();
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
-            String scheduleEntries = "from ScheduleEntry where idSchedule = '" + schedule.id + "'";
+            String scheduleEntries = "from ScheduleEntry where idSchedule = '" + idSchedule + "'";
             List scheduleEntriesResults = session.createQuery(scheduleEntries)
                     .list();
 
@@ -44,10 +44,12 @@ public class ScheduleEntryDAO {
 
     private static void getScheduleEntry(ScheduleEntry scheduleEntry, int i) {
         JSONObject obj = new JSONObject();
+        obj.put("id",scheduleEntry.id);
         obj.put("timeStart", scheduleEntry.timeStart);
         obj.put("timeStop", scheduleEntry.timeStop);
         obj.put("name", scheduleEntry.name);
         obj.put("day", scheduleEntry.day);
+        obj.put("idSchedule", scheduleEntry.idSchedule);
         obj2.put("scheduleEntry" + i, obj);
     }
 
