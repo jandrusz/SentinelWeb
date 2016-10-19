@@ -1,6 +1,5 @@
 package com.sentinel.start.user.userPanel.schedule;
 
-import com.sentinel.enums.Day;
 import com.sentinel.hibernate.ScheduleDAO;
 import com.sentinel.hibernate.ScheduleEntryDAO;
 import org.json.simple.JSONObject;
@@ -17,6 +16,11 @@ public class Schedule {
     public JSONObject addScheduleEntry(@RequestParam("name") String name, @RequestParam("timeStart") String timeStart, @RequestParam("timeStop") String timeStop,
                                        @RequestParam("day") String day, @RequestParam("idUser") String idUser ) {
         return ScheduleEntryDAO.addScheduleEntry(name, timeStart, timeStop, day, idUser);
+    }
+
+    @RequestMapping(value = "/schedule/addSchedule", method = RequestMethod.POST)
+    public JSONObject addSchedule(@RequestParam("name") String name, @RequestParam("idUser") String idUser ) {
+        return ScheduleDAO.addSchedule(0, name, idUser);
     }
 
 }

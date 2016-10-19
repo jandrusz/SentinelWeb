@@ -1,6 +1,7 @@
 package com.sentinel.hibernate;
 
 import com.sentinel.model.Child;
+import com.sentinel.model.Monitor;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -11,50 +12,43 @@ import java.util.List;
 
 public class ChildDAO {
 
-
     public static JSONObject getUserChildrenByUserId(String idUser) {
 
         JSONObject obj2 = new JSONObject();
         JSONObject finalObj = new JSONObject();
-        Child child;
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            String hql = "from Monitor where idUser = '" + idUser + "'";
+            List results = session.createQuery(hql)
+                    .list();
+            List<Monitor> monitors = new ArrayList<>();
+            monitors = results;
 
-            Integer numberOfChildren = MonitorDAO.getNumberOfChildrenForUser(idUser);
-
-            List<String> listOfUserIds = new ArrayList<>();
-
-            if (numberOfChildren > 0) {
-                String usersIds = "select idChild from Monitor where idUser = '" + idUser + "')";
-                List usersIdsResult = session.createQuery(usersIds)
-                        .list();
-                for (int i = 0; i < numberOfChildren; i++) {
-                    listOfUserIds.add(usersIdsResult.get(i).toString());
-                }
-
-                for (int i = 0; i < listOfUserIds.size(); i++) {
-                    String childName = "from Child where id = '" + listOfUserIds.get(i) + "'";
-                    List childNameResult = session.createQuery(childName)
-                            .list();
-                    child = (Child) childNameResult.get(0);
-                    JSONObject obj = new JSONObject();
-                    obj.put("id", child.id.toString());
-                    obj.put("firstName", child.firstName);
-                    obj.put("lastName", child.lastName);
-                    obj.put("login", child.login);
-                    obj.put("password", child.password == null ? "" : child.password);
-                    obj.put("idSchedule", child.idSchedule == null ? "" : child.idSchedule.toString());
-                    obj2.put("child" + i, obj);
-                }
-                finalObj.put("success", obj2);
+            if (monitors.size() == 0) {
+                finalObj.put("failure", "Brak dzieci w bazie danych");
                 return finalObj;
             }
+
+            for (int i = 0; i < monitors.size(); i++) {
+                String hql2 = "from Child where id = '" + monitors.get(i).idChild + "'";
+                List results2 = session.createQuery(hql2)
+                        .list();
+                Child child = (Child) results2.get(0);
+                JSONObject obj = new JSONObject();
+                obj.put("id", child.id.toString());
+                obj.put("firstName", child.firstName);
+                obj.put("lastName", child.lastName);
+                obj.put("login", child.login);
+                obj.put("password", child.password == null ? "" : child.password);
+                obj.put("idSchedule", child.idSchedule == null ? "" : child.idSchedule.toString());
+                obj2.put("child" + i, obj);
+            }
+            finalObj.put("success", obj2);
+            return finalObj;
+
         } catch (HibernateException e) {
             throw new HibernateException(e);
         }
-        finalObj.put("failure", "Brak dzieci w bazie danych");
-        return finalObj;
-
     }
 
     public static Integer getChildId(String login) {

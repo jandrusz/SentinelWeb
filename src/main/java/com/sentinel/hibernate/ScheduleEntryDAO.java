@@ -1,7 +1,5 @@
 package com.sentinel.hibernate;
 
-import com.sentinel.enums.Day;
-import com.sentinel.model.Schedule;
 import com.sentinel.model.ScheduleEntry;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

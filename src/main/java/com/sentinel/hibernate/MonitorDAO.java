@@ -40,7 +40,7 @@ public class MonitorDAO {
         Transaction tx = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             tx = session.beginTransaction();
-            Monitor user = new Monitor(idUser, idChild);
+            Monitor user = new Monitor(0, idUser, idChild);
             session.save(user);
             tx.commit();
         } catch (HibernateException e) {
