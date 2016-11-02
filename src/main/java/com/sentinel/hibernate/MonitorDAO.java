@@ -24,6 +24,7 @@ public class MonitorDAO {
         }
     }
 
+    //TODO nie wysyla failure bo wczesniej rzuca watek
     public static JSONObject bindChildToParent(String login, String password, String idUser) {
         JSONObject finalObj = new JSONObject();
 

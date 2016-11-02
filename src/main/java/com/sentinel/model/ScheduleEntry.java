@@ -31,10 +31,19 @@ public class ScheduleEntry {
     @Column(name = "id_schedule")
     public Integer idSchedule;
 
-    @Column(name = "id_user")
-    public Integer idUser;
-
     @Column(name = "id_area")
     public Integer idArea;
 
+    public ScheduleEntry(Integer id, String name, String timeStart, String timeStop, String day, Integer idSchedule, Integer idArea) {
+        this.id = id;
+        this.name = name;
+        this.timeStart = timeStart;
+        this.timeStop = timeStop;
+        this.day = day;
+        this.idSchedule = idSchedule;
+        this.idArea = idArea;
+    }
+
+    public ScheduleEntry() {
+    }
 }

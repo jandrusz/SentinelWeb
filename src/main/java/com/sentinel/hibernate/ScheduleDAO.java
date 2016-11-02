@@ -4,6 +4,7 @@ import com.sentinel.model.Schedule;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
@@ -58,6 +59,44 @@ public class ScheduleDAO {
 
             return finalObj;
         }
+    }
+
+    public static JSONObject removeSchedule(String idSchedule) {
+
+        JSONObject finalObj = new JSONObject();
+        Transaction tx = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            tx = session.beginTransaction();
+            String hql = "delete from Schedule where id = '" + idSchedule + "'";
+            Query q = session.createQuery(hql);
+            q.executeUpdate();
+            tx.commit();
+            finalObj.put("success", "Usunięto");
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            finalObj.put("failure", "Coś poszło nie tak");
+        }
+
+        return finalObj;
+    }
+
+    public static JSONObject editScheduleName(String idSchedule, String newName){
+        JSONObject finalObj = new JSONObject();
+        Transaction tx = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            tx = session.beginTransaction();
+            String hql = "update Schedule set name = '" + newName +"' where id = '" + idSchedule + "'";
+            Query q = session.createQuery(hql);
+            q.executeUpdate();
+            tx.commit();
+            finalObj.put("success", "Zaktualizowano");
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            finalObj.put("failure", "Coś poszło nie tak");
+        }
+
+        return finalObj;
+
     }
 
 }

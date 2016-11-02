@@ -1,8 +1,10 @@
 package com.sentinel.hibernate;
 
+import com.sentinel.model.Monitor;
 import com.sentinel.model.ScheduleEntry;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.json.simple.JSONObject;
 
 import java.util.List;
@@ -42,7 +44,7 @@ public class ScheduleEntryDAO {
 
     private static void getScheduleEntry(ScheduleEntry scheduleEntry, int i) {
         JSONObject obj = new JSONObject();
-        obj.put("id",scheduleEntry.id);
+        obj.put("id", scheduleEntry.id);
         obj.put("timeStart", scheduleEntry.timeStart);
         obj.put("timeStop", scheduleEntry.timeStop);
         obj.put("name", scheduleEntry.name);
@@ -52,9 +54,20 @@ public class ScheduleEntryDAO {
     }
 
     //TODO tutaj dodanie wpisu do bazy danych
-    public static JSONObject addScheduleEntry(String name, String timeStart, String timeStop, String day, String idUser) {
+    public static JSONObject addScheduleEntry(String name, String timeStart, String timeStop, String day, String idSchedule) {
         finalObj = new JSONObject();
-        finalObj.put("success", "dodano wpis");
+
+        Transaction tx = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            tx = session.beginTransaction();
+            ScheduleEntry scheduleEntry = new ScheduleEntry(0, name, timeStart, timeStop, day, Integer.valueOf(idSchedule), 0);
+            session.save(scheduleEntry);
+            tx.commit();
+            finalObj.put("success", "dodano wpis");
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            finalObj.put("failure", "nie dodano wpisu");
+        }
 
         return finalObj;
     }

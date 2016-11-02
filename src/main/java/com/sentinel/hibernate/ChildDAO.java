@@ -40,7 +40,7 @@ public class ChildDAO {
                 obj.put("lastName", child.lastName);
                 obj.put("login", child.login);
                 obj.put("password", child.password == null ? "" : child.password);
-                obj.put("idSchedule", child.idSchedule == null ? "" : child.idSchedule.toString());
+                obj.put("idSchedule", child.idSchedule == null ? "0" : child.idSchedule.toString()); //jesli schedule jest null to ustawiamy zero
                 obj2.put("child" + i, obj);
             }
             finalObj.put("success", obj2);
