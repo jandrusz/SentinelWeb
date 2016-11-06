@@ -10,4 +10,11 @@
         <property name="hibernate.connection.username">sentinel</property>
         <property name="hibernate.connection.password">sentinel</property>
     </session-factory>
+    <!--<session-factory>-->
+        <!--<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>-->
+        <!--<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>-->
+        <!--<property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/database</property>-->
+        <!--<property name="hibernate.connection.username">Kuba</property>-->
+        <!--<property name="hibernate.connection.password">politechnika</property>-->
+    <!--</session-factory>-->
 </hibernate-configuration>
