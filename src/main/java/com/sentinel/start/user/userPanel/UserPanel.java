@@ -20,7 +20,7 @@ public class UserPanel {
     }
 
     @RequestMapping(value = "/schedules", method = RequestMethod.POST)
-    public JSONObject getSchedules(@RequestParam("idUser") String idUser ) {
+    public JSONObject getSchedules(@RequestParam("idUser") String idUser) {
         return ScheduleDAO.getSchedulesByUserId(idUser);
     }
 

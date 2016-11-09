@@ -80,12 +80,12 @@ public class ScheduleDAO {
         return finalObj;
     }
 
-    public static JSONObject editScheduleName(String idSchedule, String newName){
+    public static JSONObject editScheduleName(String idSchedule, String newName) {
         JSONObject finalObj = new JSONObject();
         Transaction tx = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             tx = session.beginTransaction();
-            String hql = "update Schedule set name = '" + newName +"' where id = '" + idSchedule + "'";
+            String hql = "update Schedule set name = '" + newName + "' where id = '" + idSchedule + "'";
             Query q = session.createQuery(hql);
             q.executeUpdate();
             tx.commit();

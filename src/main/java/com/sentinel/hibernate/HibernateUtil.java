@@ -20,6 +20,7 @@ class HibernateUtil {
             configuration.addAnnotatedClass(Monitor.class);
             configuration.addAnnotatedClass(Schedule.class);
             configuration.addAnnotatedClass(ScheduleEntry.class);
+            configuration.addAnnotatedClass(Location.class);
             ServiceRegistry serviceRegistry
                     = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties()).build();
