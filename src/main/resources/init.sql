@@ -45,7 +45,7 @@ latitude number(10,7),
 day varchar2(30),
 time varchar(30),
 id_child int
-)
+);
 
 CREATE SEQUENCE schedule_entries_id_seq;
 
@@ -92,8 +92,6 @@ BEGIN
 END;
 
 CREATE SEQUENCE monitors_id_seq;
-
-drop trigger monitors_id_seq;
 
 CREATE OR REPLACE TRIGGER monitors_id_seq 
 BEFORE INSERT ON monitors 
