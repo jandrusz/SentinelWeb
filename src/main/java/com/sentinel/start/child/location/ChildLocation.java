@@ -8,13 +8,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class Location {
+public class ChildLocation {
 
     @RequestMapping(value = "location/saveLocation", method = RequestMethod.POST)
     public JSONObject saveLocation(@RequestParam("longitude") String longitude,
                                    @RequestParam("latitude") String latitude, @RequestParam("day") String day,
-                                   @RequestParam("time") String time) {
-        return LocationDAO.saveLocation(0, longitude, latitude, day, time);
+                                   @RequestParam("time") String time, @RequestParam("idChild") String idChild) {
+
+        return LocationDAO.saveLocation(0, longitude, latitude, day, time, idChild);
     }
 
 }

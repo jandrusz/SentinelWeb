@@ -8,7 +8,7 @@ import org.json.simple.JSONObject;
 
 public class LocationDAO {
 
-    public static JSONObject saveLocation(Integer idLocation, String longitude, String latitude, String day, String time) {
+    public static JSONObject saveLocation(Integer idLocation, String longitude, String latitude, String day, String time, String idChild) {
 
         JSONObject obj = new JSONObject();
         Transaction tx = null;
@@ -18,6 +18,10 @@ public class LocationDAO {
             Location location = new Location(idLocation, Double.parseDouble(longitude), Double.parseDouble(latitude), day, time);
             session.save(location);
             tx.commit();
+
+            ChildLocationDAO.getLocationId(Double.parseDouble(longitude), Double.parseDouble(latitude), day, time, Integer.parseInt(idChild));
+
+            //TODO uzyskac id wstawionego Location w tym miejscu
             obj.put("success", "Zarejestrowano pomyślnie, możesz się zalogować.");
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
