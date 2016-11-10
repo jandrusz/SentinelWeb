@@ -30,14 +30,18 @@ public class Location {
     @Column(name = "time")
     public String time;
 
+    @Column(name = "id_child")
+    public Integer idChild;
+
     public Location() {
     }
 
-    public Location(Integer id, Double longitude, Double latitude, String day, String time) {
+    public Location(Integer id, Double longitude, Double latitude, String day, String time, Integer idChild) {
         this.id = id;
         this.longitude = longitude;
         this.latitude = latitude;
         this.day = day;
         this.time = time;
+        this.idChild = idChild;
     }
 }

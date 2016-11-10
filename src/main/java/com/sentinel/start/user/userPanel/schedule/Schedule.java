@@ -24,12 +24,12 @@ public class Schedule {
 
     }
 
-    @RequestMapping(value = "schedule/removeSchedule", method = RequestMethod.POST)
+    @RequestMapping(value = "/schedule/removeSchedule", method = RequestMethod.POST)
     public JSONObject removeSchedule(@RequestParam("idSchedule") String idSchedule) {
         return ScheduleDAO.removeSchedule(idSchedule);
     }
 
-    @RequestMapping(value = "schedule/editScheduleName", method = RequestMethod.POST)
+    @RequestMapping(value = "/schedule/editScheduleName", method = RequestMethod.POST)
     public JSONObject editScheduleName(@RequestParam("idSchedule") String idSchedule, @RequestParam("newName") String newName) {
         return ScheduleDAO.editScheduleName(idSchedule, newName);
     }
