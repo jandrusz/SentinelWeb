@@ -5,6 +5,7 @@ import com.sentinel.model.Monitor;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
@@ -106,7 +107,7 @@ public class ChildDAO {
         if (!isLoginInDatabase(login)) {
             try (Session session = HibernateUtil.getSessionFactory().openSession()) {
                 tx = session.beginTransaction();
-                Child child = new Child(id, firstName, lastName, login, password, null);
+                Child child = new Child(id, firstName, lastName, login, password, 0);
                 session.save(child);
                 tx.commit();
                 obj.put("success", "Zarejestrowano pomyślnie, możesz się zalogować.");
@@ -127,6 +128,40 @@ public class ChildDAO {
                 .list();
         session.close();
         return results.size() > 0;
+    }
+
+    public static JSONObject bindChildToSchedule(String idChild, String idSchedule) {
+
+        JSONObject finalObj = new JSONObject();
+        Transaction tx = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            tx = session.beginTransaction();
+            String hql = "update Child set idSchedule = '" + idSchedule + "' where id = '" + idChild + "'";
+            Query q = session.createQuery(hql);
+            q.executeUpdate();
+            tx.commit();
+            finalObj.put("success", "Zaktualizowano");
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            finalObj.put("failure", "Coś poszło nie tak");
+        }
+
+        return finalObj;
+
+    }
+
+    public static void setIdScheduleToDefaultValue(String idSchedule) {
+        JSONObject finalObj = new JSONObject();
+        Transaction tx = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            tx = session.beginTransaction();
+            String hql = "update Child set idSchedule = 0 where idSchedule = '" + idSchedule + "'";
+            Query q = session.createQuery(hql);
+            q.executeUpdate();
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+        }
     }
 
 }

@@ -1,5 +1,6 @@
 package com.sentinel.start.user.userPanel.schedule;
 
+import com.sentinel.hibernate.ChildDAO;
 import com.sentinel.hibernate.ScheduleDAO;
 import com.sentinel.hibernate.ScheduleEntryDAO;
 import org.json.simple.JSONObject;
@@ -32,6 +33,11 @@ public class Schedule {
     @RequestMapping(value = "/schedule/editScheduleName", method = RequestMethod.POST)
     public JSONObject editScheduleName(@RequestParam("idSchedule") String idSchedule, @RequestParam("newName") String newName) {
         return ScheduleDAO.editScheduleName(idSchedule, newName);
+    }
+
+    @RequestMapping(value = "/schedule/bindChildToSchedule", method = RequestMethod.POST)
+    public JSONObject bindChildToSchedule(@RequestParam("idChild") String idChild, @RequestParam("idSchedule") String idSchedule) {
+        return ChildDAO.bindChildToSchedule(idChild, idSchedule);
     }
 
 }
