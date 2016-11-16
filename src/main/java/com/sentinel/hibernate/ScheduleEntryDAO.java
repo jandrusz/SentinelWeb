@@ -53,15 +53,21 @@ public class ScheduleEntryDAO {
         obj2.put("scheduleEntry" + i, obj);
     }
 
-    //TODO tutaj dodanie wpisu do bazy danych
-    public static JSONObject addScheduleEntry(String name, String timeStart, String timeStop, String day, String idSchedule) {
+    public static JSONObject addOrEditScheduleEntry(String name, String timeStart, String timeStop, String day, String idSchedule, String idScheduleEntry) {
         finalObj = new JSONObject();
 
         Transaction tx = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             tx = session.beginTransaction();
-            ScheduleEntry scheduleEntry = new ScheduleEntry(0, name, timeStart, timeStop, day, Integer.valueOf(idSchedule), 0);
-            session.save(scheduleEntry);
+
+            if (idScheduleEntry.isEmpty()) {
+                ScheduleEntry scheduleEntry = new ScheduleEntry(0, name, timeStart, timeStop, day, Integer.valueOf(idSchedule), 0);
+                session.save(scheduleEntry);
+            } else {
+                String hql = "update ScheduleEntry set name = '" + name + "', timeStart = '" + timeStart + "', timeStop = '" + timeStop + "',day = '" + day + "' where id = " + idScheduleEntry + "";
+                Query q = session.createQuery(hql);
+                q.executeUpdate();
+            }
             tx.commit();
             finalObj.put("success", "dodano wpis");
         } catch (HibernateException e) {
@@ -84,6 +90,24 @@ public class ScheduleEntryDAO {
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
         }
+    }
+
+    public static JSONObject removeScheduleEntry(String scheduleEntryId) {
+        finalObj = new JSONObject();
+
+        Transaction tx = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            tx = session.beginTransaction();
+            String hql = "delete from ScheduleEntry where id = '" + scheduleEntryId + "'";
+            Query q = session.createQuery(hql);
+            q.executeUpdate();
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            finalObj.put("failure", "Nie udało się usunąć");
+        }
+        finalObj.put("success", "Usunięto");
+        return finalObj;
     }
 
 }
