@@ -28,10 +28,10 @@ public class ScheduleEntryDAO {
                 getScheduleEntry(scheduleEntry, i);
             }
 
-            if (scheduleEntriesResults.size() == 0) {
-                finalObj.put("failure", "Cos poszło nie tak");
-                return finalObj;
-            }
+//            if (scheduleEntriesResults.size() == 0) {
+//                finalObj.put("failure", "Cos poszło nie tak");
+//                return finalObj;
+//            }
 
             finalObj.put("success", obj2);
             return finalObj;
@@ -63,16 +63,18 @@ public class ScheduleEntryDAO {
             if (idScheduleEntry.isEmpty()) {
                 ScheduleEntry scheduleEntry = new ScheduleEntry(0, name, timeStart, timeStop, day, Integer.valueOf(idSchedule), 0);
                 session.save(scheduleEntry);
+                finalObj.put("success", "Dodano wpis");
             } else {
                 String hql = "update ScheduleEntry set name = '" + name + "', timeStart = '" + timeStart + "', timeStop = '" + timeStop + "',day = '" + day + "' where id = " + idScheduleEntry + "";
                 Query q = session.createQuery(hql);
                 q.executeUpdate();
+                finalObj.put("success", "Zaktualizowano wpis");
             }
             tx.commit();
-            finalObj.put("success", "dodano wpis");
+
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
-            finalObj.put("failure", "nie dodano wpisu");
+            finalObj.put("failure", "Nie dodano wpisu");
         }
 
         return finalObj;

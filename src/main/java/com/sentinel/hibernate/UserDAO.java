@@ -20,13 +20,13 @@ public class UserDAO {
                 User user = new User(id, firstName, lastName, login, password);
                 session.save(user);
                 tx.commit();
-                obj.put("success", "Zarejestrowano pomyślnie, możesz się zalogować.");
+                obj.put("success", "Zarejestrowano pomyślnie, możesz się zalogować");
             } catch (HibernateException e) {
                 if (tx != null) tx.rollback();
-                obj.put("failure", "Nie udało się zarejestrować.");
+                obj.put("failure", "Nie udało się zarejestrować");
             }
         } else {
-            obj.put("failure", "Niepowodzenie, podany login już istnieje w bazie danych.");
+            obj.put("failure", "Niepowodzenie, podany login już istnieje w bazie danych");
         }
         return obj;
     }

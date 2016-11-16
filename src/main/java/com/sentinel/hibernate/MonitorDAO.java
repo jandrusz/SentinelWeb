@@ -60,8 +60,9 @@ public class MonitorDAO {
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
+            finalObj.put("failure", "Nie udało się usunąć");
+            return finalObj;
         }
-
         finalObj.put("success", "Usunięto");
         return finalObj;
     }

@@ -27,7 +27,6 @@ public class Schedule {
     @RequestMapping(value = "/schedule/addSchedule", method = RequestMethod.POST)
     public JSONObject addSchedule(@RequestParam("name") String name, @RequestParam("idUser") String idUser) {
         return ScheduleDAO.addSchedule(0, name, idUser);
-
     }
 
     @RequestMapping(value = "/schedule/removeSchedule", method = RequestMethod.POST)

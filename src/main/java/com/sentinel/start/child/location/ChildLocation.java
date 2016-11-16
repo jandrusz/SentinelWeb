@@ -14,7 +14,6 @@ public class ChildLocation {
     public JSONObject saveLocation(@RequestParam("longitude") String longitude,
                                    @RequestParam("latitude") String latitude, @RequestParam("day") String day,
                                    @RequestParam("time") String time, @RequestParam("idChild") String idChild) {
-
         return LocationDAO.saveLocation(0, longitude, latitude, day, time, idChild);
     }
 

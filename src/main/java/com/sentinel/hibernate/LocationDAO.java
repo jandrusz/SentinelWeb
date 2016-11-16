@@ -20,10 +20,10 @@ public class LocationDAO {
             Location location = new Location(idLocation, Double.parseDouble(longitude), Double.parseDouble(latitude), day, time, Integer.parseInt(idChild));
             session.save(location);
             tx.commit();
-            obj.put("success", "Udało się zapisać.");
+            obj.put("success", "Zapisano");
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
-            obj.put("failure", "Nie udało się zapisać.");
+            obj.put("failure", "Nie udało się zapisać");
         }
         return obj;
     }

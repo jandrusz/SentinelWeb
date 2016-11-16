@@ -10,12 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class Location {
 
-
     @RequestMapping(value = "location/getLocation", method = RequestMethod.POST)
     public JSONObject getLocation(@RequestParam("idChild") String idChild) {
-
         return LocationDAO.getLocation(idChild);
     }
-
 
 }
