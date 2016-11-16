@@ -1,13 +1,15 @@
 package com.sentinel.model;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Data
+@Setter
+@Getter
 @Entity
 @Table(name = "children")
 public class Child {

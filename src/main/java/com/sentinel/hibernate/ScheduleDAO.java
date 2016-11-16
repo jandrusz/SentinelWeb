@@ -72,6 +72,7 @@ public class ScheduleDAO {
             q.executeUpdate();
             tx.commit();
             ChildDAO.setIdScheduleToDefaultValue(idSchedule);
+            ScheduleEntryDAO.deleteEntriesFromSchedule(idSchedule);
             finalObj.put("success", "Usunięto");
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();

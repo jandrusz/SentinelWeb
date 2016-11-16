@@ -4,6 +4,7 @@ import com.sentinel.model.ScheduleEntry;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.json.simple.JSONObject;
 
 import java.util.List;
@@ -70,4 +71,19 @@ public class ScheduleEntryDAO {
 
         return finalObj;
     }
+
+    public static void deleteEntriesFromSchedule(String idSchedule) {
+
+        Transaction tx = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            tx = session.beginTransaction();
+            String hql = "delete from ScheduleEntry where idSchedule = '" + idSchedule + "'";
+            Query q = session.createQuery(hql);
+            q.executeUpdate();
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+        }
+    }
+
 }
