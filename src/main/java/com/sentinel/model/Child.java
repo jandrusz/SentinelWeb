@@ -2,11 +2,9 @@ package com.sentinel.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Setter
 @Getter
@@ -16,6 +14,8 @@ public class Child {
 
     @Id
     @Column(name = "id")
+    @GenericGenerator(name = "generator", strategy = "increment")
+    @GeneratedValue(generator = "generator")
     public Integer id;
 
     @Column(name = "first_name")
@@ -33,8 +33,7 @@ public class Child {
     @Column(name = "id_schedule")
     public Integer idSchedule;
 
-    public Child(Integer id, String firstName, String lastName, String login, String password, Integer idSchedule) {
-        this.id = id;
+    public Child(String firstName, String lastName, String login, String password, Integer idSchedule) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.login = login;

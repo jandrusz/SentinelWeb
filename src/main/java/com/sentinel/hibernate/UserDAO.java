@@ -10,14 +10,14 @@ import java.util.List;
 
 public class UserDAO {
 
-    public static JSONObject addUser(Integer id, String firstName, String lastName, String login, String password) {
+    public static JSONObject addUser(String firstName, String lastName, String login, String password) {
 
         JSONObject obj = new JSONObject();
         Transaction tx = null;
         if (!isLoginInDatabase(login)) {
             try (Session session = HibernateUtil.getSessionFactory().openSession()) {
                 tx = session.beginTransaction();
-                User user = new User(id, firstName, lastName, login, password);
+                User user = new User(firstName, lastName, login, password);
                 session.save(user);
                 tx.commit();
                 obj.put("success", "Zarejestrowano pomyślnie, możesz się zalogować");

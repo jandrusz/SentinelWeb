@@ -2,11 +2,9 @@ package com.sentinel.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Setter
@@ -15,6 +13,8 @@ import javax.persistence.Table;
 public class Location {
 
     @Id
+    @GenericGenerator(name = "generator", strategy = "increment")
+    @GeneratedValue(generator = "generator")
     @Column(name = "id")
     public Integer id;
 
@@ -36,8 +36,7 @@ public class Location {
     public Location() {
     }
 
-    public Location(Integer id, Double longitude, Double latitude, String day, String time, Integer idChild) {
-        this.id = id;
+    public Location(Double longitude, Double latitude, String day, String time, Integer idChild) {
         this.longitude = longitude;
         this.latitude = latitude;
         this.day = day;

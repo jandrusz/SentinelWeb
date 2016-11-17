@@ -13,7 +13,7 @@ public class RegisterUser {
     @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
     public JSONObject register(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,
                                @RequestParam("login") String login, @RequestParam("password") String password) {
-        return UserDAO.addUser(0, firstName, lastName, login, password);
+        return UserDAO.addUser(firstName, lastName, login, password);
     }
 
 }

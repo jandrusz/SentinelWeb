@@ -53,7 +53,7 @@ public class ScheduleEntryDAO {
         obj2.put("scheduleEntry" + i, obj);
     }
 
-    public static JSONObject addOrEditScheduleEntry(String name, String timeStart, String timeStop, String day, String idSchedule, String idScheduleEntry) {
+    public static JSONObject addOrEditScheduleEntry(String name, String timeStart, String timeStop, String day, String idSchedule, String idScheduleEntry, String idArea) {
         finalObj = new JSONObject();
 
         Transaction tx = null;
@@ -61,7 +61,7 @@ public class ScheduleEntryDAO {
             tx = session.beginTransaction();
 
             if (idScheduleEntry.isEmpty()) {
-                ScheduleEntry scheduleEntry = new ScheduleEntry(0, name, timeStart, timeStop, day, Integer.valueOf(idSchedule), 0);
+                ScheduleEntry scheduleEntry = new ScheduleEntry(name, timeStart, timeStop, day, Integer.valueOf(idSchedule), Integer.parseInt(idArea));
                 session.save(scheduleEntry);
                 finalObj.put("success", "Dodano wpis");
             } else {

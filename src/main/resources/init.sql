@@ -47,68 +47,9 @@ time varchar(30),
 id_child int
 );
 
-CREATE SEQUENCE schedule_entries_id_seq;
-
-CREATE OR REPLACE TRIGGER schedule_entries_id_trig 
-BEFORE INSERT ON schedule_entries 
-FOR EACH ROW
-BEGIN
-  SELECT schedule_entries_id_seq.NEXTVAL
-  INTO   :new.id
-  FROM   dual;
-END;
-
-CREATE SEQUENCE locations_id_seq;
-
-CREATE OR REPLACE TRIGGER locations_id_trig 
-BEFORE INSERT ON locations
-FOR EACH ROW
-BEGIN
-  SELECT locations_id_seq.NEXTVAL
-  INTO   :new.id
-  FROM   dual;
-END;
-
-CREATE SEQUENCE users_id_seq;
-
-CREATE OR REPLACE TRIGGER users_id_trig 
-BEFORE INSERT ON users 
-FOR EACH ROW
-BEGIN
-  SELECT users_id_seq.NEXTVAL
-  INTO   :new.id
-  FROM   dual;
-END;
-
-CREATE SEQUENCE children_id_seq;
-
-CREATE OR REPLACE TRIGGER children_id_seq 
-BEFORE INSERT ON children 
-FOR EACH ROW
-BEGIN
-  SELECT children_id_seq.NEXTVAL
-  INTO   :new.id
-  FROM   dual;
-END;
-
-CREATE SEQUENCE monitors_id_seq;
-
-CREATE OR REPLACE TRIGGER monitors_id_seq 
-BEFORE INSERT ON monitors 
-FOR EACH ROW
-BEGIN
-  SELECT monitors_id_seq.NEXTVAL
-  INTO   :new.id
-  FROM   dual;
-END;
-
-CREATE SEQUENCE schedules_id_seq;
-
-CREATE OR REPLACE TRIGGER schedules_id_trig 
-BEFORE INSERT ON schedules 
-FOR EACH ROW
-BEGIN
-  SELECT schedules_id_seq.NEXTVAL
-  INTO   :new.id
-  FROM   dual;
-END;
+create table areas (
+id int primary key not null,
+longitude number(10,7),
+latitude number(10,7),
+radius number(12,7)
+);

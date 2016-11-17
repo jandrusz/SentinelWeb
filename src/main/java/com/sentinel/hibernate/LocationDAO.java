@@ -10,14 +10,14 @@ import java.util.List;
 
 public class LocationDAO {
 
-    public static JSONObject saveLocation(Integer idLocation, String longitude, String latitude, String day, String time, String idChild) {
+    public static JSONObject saveLocation(String longitude, String latitude, String day, String time, String idChild) {
 
         JSONObject obj = new JSONObject();
         Transaction tx = null;
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             tx = session.beginTransaction();
-            Location location = new Location(idLocation, Double.parseDouble(longitude), Double.parseDouble(latitude), day, time, Integer.parseInt(idChild));
+            Location location = new Location(Double.parseDouble(longitude), Double.parseDouble(latitude), day, time, Integer.parseInt(idChild));
             session.save(location);
             tx.commit();
             obj.put("success", "Zapisano");
@@ -35,7 +35,7 @@ public class LocationDAO {
         Location location;
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            String hql = "from Location where time = (select max(time) from Location where idChild = '" + idChild + "') and day = (select max(day) from Location where idChild = '" + idChild + "')";
+            String hql = "from Location where id = (select max(id) from Location where idChild = '" + idChild + "')";
             List results = session.createQuery(hql)
                     .list();
             location = (Location) results.get(0);

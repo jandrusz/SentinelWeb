@@ -100,14 +100,14 @@ public class ChildDAO {
         return false;
     }
 
-    public static JSONObject addChild(Integer id, String firstName, String lastName, String login, String password) {
+    public static JSONObject addChild(String firstName, String lastName, String login, String password) {
 
         JSONObject obj = new JSONObject();
         Transaction tx = null;
         if (!isLoginInDatabase(login)) {
             try (Session session = HibernateUtil.getSessionFactory().openSession()) {
                 tx = session.beginTransaction();
-                Child child = new Child(id, firstName, lastName, login, password, 0);
+                Child child = new Child(firstName, lastName, login, password, 0);
                 session.save(child);
                 tx.commit();
                 obj.put("success", "Zarejestrowano pomyślnie, możesz się zalogować");

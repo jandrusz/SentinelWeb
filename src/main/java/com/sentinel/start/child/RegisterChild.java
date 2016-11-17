@@ -14,7 +14,7 @@ public class RegisterChild {
     @RequestMapping(value = "/registerChild", method = RequestMethod.POST)
     public JSONObject register(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,
                                @RequestParam("login") String login, @RequestParam("password") String password) {
-        return ChildDAO.addChild(0, firstName, lastName, login, password);
+        return ChildDAO.addChild(firstName, lastName, login, password);
     }
 
 }

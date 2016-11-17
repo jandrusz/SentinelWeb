@@ -1,5 +1,6 @@
 package com.sentinel.start.user.userPanel.location;
 
+import com.sentinel.hibernate.AreaDAO;
 import com.sentinel.hibernate.LocationDAO;
 import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,12 @@ public class Location {
     @RequestMapping(value = "location/getLocation", method = RequestMethod.POST)
     public JSONObject getLocation(@RequestParam("idChild") String idChild) {
         return LocationDAO.getLocation(idChild);
+    }
+
+    @RequestMapping(value = "area/addArea", method = RequestMethod.POST)
+    public JSONObject saveArea(@RequestParam("areaLatitude") String areaLatitude,
+                               @RequestParam("areaLongitude") String areaLongitude, @RequestParam("areaRadius") String areaRadius) {
+        return AreaDAO.saveArea(areaLatitude, areaLongitude, areaRadius);
     }
 
 }

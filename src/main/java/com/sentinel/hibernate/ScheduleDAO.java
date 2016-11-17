@@ -40,7 +40,7 @@ public class ScheduleDAO {
         }
     }
 
-    public static JSONObject addSchedule(Integer id, String name, String idUser) {
+    public static JSONObject addSchedule(String name, String idUser) {
         JSONObject finalObj = new JSONObject();
 
 
@@ -48,7 +48,7 @@ public class ScheduleDAO {
         {
             try (Session session = HibernateUtil.getSessionFactory().openSession()) {
                 tx = session.beginTransaction();
-                Schedule schedule = new Schedule(id, name, Integer.valueOf(idUser));
+                Schedule schedule = new Schedule(name, Integer.valueOf(idUser));
                 session.save(schedule);
                 tx.commit();
                 finalObj.put("success", "Zapisano pomyślnie");
