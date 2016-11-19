@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class Location {
 
-    @RequestMapping(value = "location/getLocation", method = RequestMethod.POST)
+    @RequestMapping(value = "/locations", method = RequestMethod.POST)
     public JSONObject getLocation(@RequestParam("idChild") String idChild) {
-        return LocationDAO.getLocation(idChild);
+        return LocationDAO.getLocations(idChild);
     }
 
-    @RequestMapping(value = "area/addArea", method = RequestMethod.POST)
+    @RequestMapping(value = "/area/addArea", method = RequestMethod.POST)
     public JSONObject saveArea(@RequestParam("areaLatitude") String areaLatitude,
                                @RequestParam("areaLongitude") String areaLongitude, @RequestParam("areaRadius") String areaRadius) {
         return AreaDAO.saveArea(areaLatitude, areaLongitude, areaRadius);

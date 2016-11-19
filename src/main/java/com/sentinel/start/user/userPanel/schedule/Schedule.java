@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class Schedule {
 
     @RequestMapping(value = "/schedule/addScheduleEntry", method = RequestMethod.POST)
-    public JSONObject addScheduleEntry(@RequestParam("name") String name, @RequestParam("timeStart") String timeStart, @RequestParam("timeStop") String timeStop,
-                                       @RequestParam("day") String day, @RequestParam("idSchedule") String idSchedule, @RequestParam("idScheduleEntry") String idScheduleEntry,
-                                       @RequestParam("idArea") String idArea) {
+    public JSONObject addOrEditScheduleEntry(@RequestParam("name") String name, @RequestParam("timeStart") String timeStart, @RequestParam("timeStop") String timeStop,
+                                             @RequestParam("day") String day, @RequestParam("idSchedule") String idSchedule, @RequestParam("idScheduleEntry") String idScheduleEntry,
+                                             @RequestParam("idArea") String idArea) {
         return ScheduleEntryDAO.addOrEditScheduleEntry(name, timeStart, timeStop, day, idSchedule, idScheduleEntry, idArea);
     }
 
