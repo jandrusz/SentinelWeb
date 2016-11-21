@@ -6,6 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.json.simple.JSONObject;
 
+import java.util.List;
+
 public class AreaDAO {
 
 
@@ -17,7 +19,7 @@ public class AreaDAO {
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             tx = session.beginTransaction();
-            Area area = new Area(Double.parseDouble(latitude), Double.parseDouble(longitude), Float.parseFloat(radius));
+            Area area = new Area(Double.parseDouble(longitude), Double.parseDouble(latitude), Float.parseFloat(radius));
             session.save(area);
             Integer id = (Integer) session.save(area);
             tx.commit();
@@ -29,6 +31,20 @@ public class AreaDAO {
             finalObj.put("failure", "Nie udało się zapisać");
         }
         return finalObj;
+    }
+
+    public static Area getArea(Integer idArea) {
+
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            String hql = "from Area where id = '" + idArea + "'";
+            List results = session.createQuery(hql)
+                    .list();
+            Area area = (Area) results.get(0);
+            return area;
+        } catch (HibernateException e) {
+            throw new HibernateException(e);
+        }
+
     }
 
 }

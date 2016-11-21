@@ -164,4 +164,18 @@ public class ChildDAO {
         }
     }
 
+    public static Child getChild(String idChild) {
+
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            String hql = "from Child where id = '" + idChild + "'";
+            List results = session.createQuery(hql)
+                    .list();
+            Child child = (Child) results.get(0);
+            return child;
+        } catch (HibernateException e) {
+            throw new HibernateException(e);
+        }
+
+    }
+
 }

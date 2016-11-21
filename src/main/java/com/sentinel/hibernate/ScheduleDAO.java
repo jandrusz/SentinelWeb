@@ -40,6 +40,19 @@ public class ScheduleDAO {
         }
     }
 
+    public static Schedule getScheduleById(String idSchedule) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            String hql = "from Schedule where id = '" + idSchedule + "'";
+            List results = session.createQuery(hql)
+                    .list();
+            Schedule schedule = (Schedule) results.get(0);
+            return schedule;
+        } catch (HibernateException e) {
+            throw new HibernateException(e);
+        }
+
+    }
+
     public static JSONObject addSchedule(String name, String idUser) {
         JSONObject finalObj = new JSONObject();
 

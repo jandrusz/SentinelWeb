@@ -112,4 +112,12 @@ public class ScheduleEntryDAO {
         return finalObj;
     }
 
+    public static ScheduleEntry getScheduleEntryToCheckLocalization(String idSchedule, String day, int hour) {
+
+        ScheduleEntry scheduleEntry = new ScheduleEntry("Szkola", "16:00", "23:00", "NIE", 1, 36);
+
+
+        return scheduleEntry;
+    }
+
 }

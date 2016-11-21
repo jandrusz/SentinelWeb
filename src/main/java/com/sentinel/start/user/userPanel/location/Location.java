@@ -16,6 +16,11 @@ public class Location {
         return LocationDAO.getLocations(idChild);
     }
 
+    @RequestMapping(value = "/locations/checkChildPosition", method = RequestMethod.POST)
+    public JSONObject checkLocation(@RequestParam("idChild") String idChild) {
+        return LocationDAO.checkLocation(idChild);
+    }
+
     @RequestMapping(value = "/area/addArea", method = RequestMethod.POST)
     public JSONObject saveArea(@RequestParam("areaLatitude") String areaLatitude,
                                @RequestParam("areaLongitude") String areaLongitude, @RequestParam("areaRadius") String areaRadius) {

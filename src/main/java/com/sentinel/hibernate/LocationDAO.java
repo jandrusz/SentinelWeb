@@ -1,13 +1,21 @@
 package com.sentinel.hibernate;
 
+import com.sentinel.model.Area;
+import com.sentinel.model.Child;
 import com.sentinel.model.Location;
+import com.sentinel.model.ScheduleEntry;
+import com.sentinel.parser.Parser;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.json.simple.JSONObject;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
 
 public class LocationDAO {
 
@@ -29,8 +37,7 @@ public class LocationDAO {
         return obj;
     }
 
-    @Deprecated
-    public static JSONObject getLocation(String idChild) {
+    public static Location getLastLocation(String idChild) {
 
         JSONObject finalObj = new JSONObject();
         JSONObject obj = new JSONObject();
@@ -46,16 +53,7 @@ public class LocationDAO {
             throw new HibernateException(e);
         }
 
-        obj.put("latitude", location.latitude);
-        obj.put("longitude", location.longitude);
-        obj.put("day", location.day);
-        obj.put("time", location.time);
-        obj2.put("location0", obj);
-
-
-        finalObj.put("success", obj2);
-
-        return finalObj;
+        return location;
     }
 
     public static JSONObject getLocations(String idChild) {
@@ -63,7 +61,7 @@ public class LocationDAO {
         JSONObject finalObj = new JSONObject();
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            String hql = "from Location where rownum <=5 and idChild = '" + idChild + "' order by id desc"; //TODO najwiekszych id albo najnowszych czasow/dni
+            String hql = "from Location where rownum <=1 and idChild = '" + idChild + "' order by id desc"; //TODO najwiekszych id albo najnowszych czasow/dni
             List results = session.createQuery(hql)
                     .list();
             List<Location> locations = new ArrayList<>();
@@ -97,5 +95,31 @@ public class LocationDAO {
         }
     }
 
+    public static JSONObject checkLocation(String idChild) {
+
+        JSONObject finalObj = new JSONObject();
+
+        Child child = ChildDAO.getChild(idChild);
+        LocalDateTime now = LocalDateTime.now();
+
+        ScheduleEntry scheduleEntry = ScheduleEntryDAO.getScheduleEntryToCheckLocalization(child.idSchedule.toString(), Parser.getDayInPolish(now.getDayOfWeek().toString()), now.getHour());
+
+        Area area = AreaDAO.getArea(scheduleEntry.idArea); //wyciagam area z bazy i robie porownanie z localization dziecka
+        Location location = LocationDAO.getLastLocation(idChild);
+
+//        if (checkChildLocalization(area, location))
+        finalObj.put("success", "blabla");
+//        else
+//            finalObj.put("failure", "blabla");
+
+        return finalObj;
+    }
+
+
+    private static boolean checkChildLocalization(Area area, Location location) { //do przeliczenia
+        if (sqrt(pow(area.latitude - location.latitude, 2) + pow(area.longitude - location.longitude, 2)) > area.radius * 0.001)
+            return true;
+        return false;
+    }
 
 }
