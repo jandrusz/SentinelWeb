@@ -1,7 +1,7 @@
 package com.sentinel.start.user.userPanel.location;
 
-import com.sentinel.hibernate.AreaDAO;
-import com.sentinel.hibernate.LocationDAO;
+import com.sentinel.hibernate.dao.AreaDAO;
+import com.sentinel.hibernate.dao.LocationDAO;
 import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

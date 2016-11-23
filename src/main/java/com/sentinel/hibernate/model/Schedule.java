@@ -1,4 +1,4 @@
-package com.sentinel.model;
+package com.sentinel.hibernate.model;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,10 +7,10 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 @Entity
-@Getter
 @Setter
-@Table(name = "monitors")
-public class Monitor {
+@Getter
+@Table(name = "schedules")
+public class Schedule {
 
     @Id
     @GenericGenerator(name = "generator", strategy = "increment")
@@ -18,17 +18,17 @@ public class Monitor {
     @Column(name = "id")
     public Integer id;
 
+    @Column(name = "name")
+    public String name;
+
     @Column(name = "id_user")
     public Integer idUser;
 
-    @Column(name = "id_child")
-    public Integer idChild;
-
-    public Monitor(Integer idUser, Integer idChild) {
+    public Schedule(String name, Integer idUser) {
+        this.name = name;
         this.idUser = idUser;
-        this.idChild = idChild;
     }
 
-    public Monitor() {
+    public Schedule() {
     }
 }

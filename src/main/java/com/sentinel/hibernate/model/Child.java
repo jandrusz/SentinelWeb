@@ -1,19 +1,21 @@
-package com.sentinel.model;
+package com.sentinel.hibernate.model;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
-@Data
+@Setter
+@Getter
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "children")
+public class Child {
 
     @Id
+    @Column(name = "id")
     @GenericGenerator(name = "generator", strategy = "increment")
     @GeneratedValue(generator = "generator")
-    @Column(name = "id")
     public Integer id;
 
     @Column(name = "first_name")
@@ -28,13 +30,17 @@ public class User {
     @Column(name = "password")
     public String password;
 
-    public User(String firstName, String last_name, String login, String password) {
+    @Column(name = "id_schedule")
+    public Integer idSchedule;
+
+    public Child(String firstName, String lastName, String login, String password, Integer idSchedule) {
         this.firstName = firstName;
-        this.lastName = last_name;
+        this.lastName = lastName;
         this.login = login;
         this.password = password;
+        this.idSchedule = idSchedule;
     }
 
-    public User() {
+    public Child() {
     }
 }

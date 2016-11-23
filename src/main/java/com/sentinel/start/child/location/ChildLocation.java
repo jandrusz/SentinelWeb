@@ -1,6 +1,6 @@
 package com.sentinel.start.child.location;
 
-import com.sentinel.hibernate.LocationDAO;
+import com.sentinel.hibernate.dao.LocationDAO;
 import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

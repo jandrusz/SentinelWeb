@@ -1,7 +1,7 @@
 package com.sentinel.start.child;
 
 
-import com.sentinel.hibernate.ChildDAO;
+import com.sentinel.hibernate.dao.ChildDAO;
 import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

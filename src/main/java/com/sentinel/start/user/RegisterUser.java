@@ -1,6 +1,6 @@
 package com.sentinel.start.user;
 
-import com.sentinel.hibernate.UserDAO;
+import com.sentinel.hibernate.dao.UserDAO;
 import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

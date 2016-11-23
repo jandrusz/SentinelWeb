@@ -1,4 +1,4 @@
-package com.sentinel.parser;
+package com.sentinel.utils;
 
 public class Parser {
 

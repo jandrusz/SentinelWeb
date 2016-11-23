@@ -1,10 +1,11 @@
-package com.sentinel.hibernate;
+package com.sentinel.hibernate.dao;
 
-import com.sentinel.model.Area;
-import com.sentinel.model.Child;
-import com.sentinel.model.Location;
-import com.sentinel.model.ScheduleEntry;
-import com.sentinel.parser.Parser;
+import com.sentinel.hibernate.utils.HibernateUtil;
+import com.sentinel.hibernate.model.Area;
+import com.sentinel.hibernate.model.Child;
+import com.sentinel.hibernate.model.Location;
+import com.sentinel.hibernate.model.ScheduleEntry;
+import com.sentinel.utils.Parser;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -107,10 +108,10 @@ public class LocationDAO {
         Area area = AreaDAO.getArea(scheduleEntry.idArea); //wyciagam area z bazy i robie porownanie z localization dziecka
         Location location = LocationDAO.getLastLocation(idChild);
 
-//        if (checkChildLocalization(area, location))
+        if (checkChildLocalization(area, location))
         finalObj.put("success", "blabla");
-//        else
-//            finalObj.put("failure", "blabla");
+        else
+            finalObj.put("failure", "blabla");
 
         return finalObj;
     }

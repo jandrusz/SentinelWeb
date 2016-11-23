@@ -1,17 +1,17 @@
-package com.sentinel.hibernate;
+package com.sentinel.hibernate.utils;
 
-import com.sentinel.model.*;
+import com.sentinel.hibernate.model.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 
-class HibernateUtil {
+public class HibernateUtil {
 
     private static SessionFactory sessionFactory;
 
-    static SessionFactory getSessionFactory() {
+    public static SessionFactory getSessionFactory() {
 
         if (sessionFactory == null) {
             Configuration configuration = new Configuration().configure();

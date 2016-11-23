@@ -1,4 +1,4 @@
-package com.sentinel.model;
+package com.sentinel.hibernate.model;
 
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;

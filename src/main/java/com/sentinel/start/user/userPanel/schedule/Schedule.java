@@ -1,8 +1,8 @@
 package com.sentinel.start.user.userPanel.schedule;
 
-import com.sentinel.hibernate.ChildDAO;
-import com.sentinel.hibernate.ScheduleDAO;
-import com.sentinel.hibernate.ScheduleEntryDAO;
+import com.sentinel.hibernate.dao.ChildDAO;
+import com.sentinel.hibernate.dao.ScheduleDAO;
+import com.sentinel.hibernate.dao.ScheduleEntryDAO;
 import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

@@ -1,6 +1,7 @@
-package com.sentinel.hibernate;
+package com.sentinel.hibernate.dao;
 
-import com.sentinel.model.Area;
+import com.sentinel.hibernate.utils.HibernateUtil;
+import com.sentinel.hibernate.model.Area;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
