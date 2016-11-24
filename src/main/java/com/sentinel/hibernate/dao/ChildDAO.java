@@ -1,8 +1,8 @@
 package com.sentinel.hibernate.dao;
 
-import com.sentinel.hibernate.utils.HibernateUtil;
 import com.sentinel.hibernate.model.Child;
 import com.sentinel.hibernate.model.Monitor;
+import com.sentinel.hibernate.utils.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

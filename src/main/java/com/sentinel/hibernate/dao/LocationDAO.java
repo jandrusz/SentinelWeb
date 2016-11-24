@@ -1,10 +1,10 @@
 package com.sentinel.hibernate.dao;
 
-import com.sentinel.hibernate.utils.HibernateUtil;
 import com.sentinel.hibernate.model.Area;
 import com.sentinel.hibernate.model.Child;
 import com.sentinel.hibernate.model.Location;
 import com.sentinel.hibernate.model.ScheduleEntry;
+import com.sentinel.hibernate.utils.HibernateUtil;
 import com.sentinel.utils.Parser;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -97,25 +97,28 @@ public class LocationDAO {
     }
 
     public static JSONObject checkLocation(String idChild) {
-
         JSONObject finalObj = new JSONObject();
+        try {
 
-        Child child = ChildDAO.getChild(idChild);
-        LocalDateTime now = LocalDateTime.now();
+            Child child = ChildDAO.getChild(idChild);
+            LocalDateTime now = LocalDateTime.now();
 
-        ScheduleEntry scheduleEntry = ScheduleEntryDAO.getScheduleEntryToCheckLocalization(child.idSchedule.toString(), Parser.getDayInPolish(now.getDayOfWeek().toString()), now.getHour());
+            ScheduleEntry scheduleEntry = ScheduleEntryDAO.getScheduleEntryToCheckLocalization(child.idSchedule.toString(), Parser.getDayInPolish(now.getDayOfWeek().toString()), now.getHour(), now.getMinute());
 
-        Area area = AreaDAO.getArea(scheduleEntry.idArea); //wyciagam area z bazy i robie porownanie z localization dziecka
-        Location location = LocationDAO.getLastLocation(idChild);
+            Area area = AreaDAO.getArea(scheduleEntry.idArea); //wyciagam area z bazy i robie porownanie z localization dziecka
+            Location location = LocationDAO.getLastLocation(idChild);
 
-        if (checkChildLocalization(area, location))
-        finalObj.put("success", "blabla");
-        else
-            finalObj.put("failure", "blabla");
+            if (checkChildLocalization(area, location))
+                finalObj.put("success", "Dziecko zgubione");
+            else
+                finalObj.put("failure", "Wszystko ok");
+        } catch (Exception e) {
+            finalObj.put("failure", "Zapewne wszystko ok - nie ma teraz przypisanego harmonogramu");
+            return finalObj;
+        }
 
         return finalObj;
     }
-
 
     private static boolean checkChildLocalization(Area area, Location location) { //do przeliczenia
         if (sqrt(pow(area.latitude - location.latitude, 2) + pow(area.longitude - location.longitude, 2)) > area.radius * 0.001)

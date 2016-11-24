@@ -28,9 +28,9 @@ public class Parser {
                 return "PON";
             case "TUESDAY":
                 return "WT";
-            case "THURSDAY":
-                return "SR";
             case "WEDNESDAY":
+                return "SR";
+            case "THURSDAY":
                 return "CZW";
             case "FRIDAY":
                 return "PIA";

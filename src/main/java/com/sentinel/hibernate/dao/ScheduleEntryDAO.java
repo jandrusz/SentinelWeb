@@ -1,7 +1,7 @@
 package com.sentinel.hibernate.dao;
 
-import com.sentinel.hibernate.utils.HibernateUtil;
 import com.sentinel.hibernate.model.ScheduleEntry;
+import com.sentinel.hibernate.utils.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -113,12 +113,18 @@ public class ScheduleEntryDAO {
         return finalObj;
     }
 
-    public static ScheduleEntry getScheduleEntryToCheckLocalization(String idSchedule, String day, int hour) {
-
-        ScheduleEntry scheduleEntry = new ScheduleEntry("Szkola", "16:00", "23:00", "NIE", 1, 36);
+    public static ScheduleEntry getScheduleEntryToCheckLocalization(String idSchedule, String day, int hour, int minutes) {
 
 
-        return scheduleEntry;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            String hql = "FROM ScheduleEntry where idSchedule = '" + idSchedule + "' and day= '" + day + "' and '" + hour + ":" + minutes + "' between timeStart and timeStop";
+            List results = session.createQuery(hql)
+                    .list();
+            return (ScheduleEntry) results.get(0);
+        } catch (HibernateException e) {
+            throw new HibernateException(e);
+        }
+
     }
 
 }
