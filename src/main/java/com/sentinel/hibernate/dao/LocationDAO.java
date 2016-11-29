@@ -5,7 +5,7 @@ import com.sentinel.hibernate.model.Child;
 import com.sentinel.hibernate.model.Location;
 import com.sentinel.hibernate.model.ScheduleEntry;
 import com.sentinel.hibernate.utils.HibernateUtil;
-import com.sentinel.utils.Parser;
+import com.sentinel.util.Parser;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -15,8 +15,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.Math.pow;
-import static java.lang.Math.sqrt;
+import static java.lang.Math.*;
 
 public class LocationDAO {
 
@@ -121,7 +120,13 @@ public class LocationDAO {
     }
 
     private static boolean checkChildLocalization(Area area, Location location) { //do przeliczenia
-        if (sqrt(pow(area.latitude - location.latitude, 2) + pow(area.longitude - location.longitude, 2)) > area.radius * 0.001)
+
+        double areaLatitude = area.latitude * 110574;
+        double locationLatitude = location.latitude * 110574;
+        double areaLongitude = area.longitude * 111320 * cos(Math.toRadians(area.latitude));
+        double locationLongitude = location.longitude * 111320 * cos(Math.toRadians(location.latitude));
+
+        if (sqrt(pow(areaLatitude - locationLatitude, 2) + pow(areaLongitude - locationLongitude, 2)) > area.radius)
             return true;
         return false;
     }
