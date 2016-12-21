@@ -3,12 +3,10 @@ package com.sentinel.api;
 import com.sentinel.hibernate.dao.ChildDAO;
 import com.sentinel.hibernate.dao.LocationDAO;
 import org.json.simple.JSONObject;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
 public class ChildApi {
 
     @RequestMapping(value = "/loginChild", method = RequestMethod.POST)

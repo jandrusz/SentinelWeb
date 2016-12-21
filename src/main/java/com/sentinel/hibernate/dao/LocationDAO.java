@@ -6,6 +6,7 @@ import com.sentinel.hibernate.model.Location;
 import com.sentinel.hibernate.model.ScheduleEntry;
 import com.sentinel.hibernate.utils.HibernateUtil;
 import com.sentinel.util.Parser;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -119,7 +120,7 @@ public class LocationDAO {
         return finalObj;
     }
 
-    private static boolean checkChildLocalization(Area area, Location location) { //do przeliczenia
+    private static boolean checkChildLocalization(Area area, Location location) {
 
         double areaLatitude = area.latitude * 110574;
         double locationLatitude = location.latitude * 110574;

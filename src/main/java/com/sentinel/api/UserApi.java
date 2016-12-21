@@ -5,9 +5,9 @@ import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
 public class UserApi {
 
-    @CrossOrigin
     @RequestMapping(value = "/loginUser", method = RequestMethod.POST)
     public JSONObject logIn(@RequestParam("login") String login, @RequestParam("password") String password) {
         return UserDAO.getUserData(login, password);
