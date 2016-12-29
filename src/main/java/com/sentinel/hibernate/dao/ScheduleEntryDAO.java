@@ -49,6 +49,7 @@ public class ScheduleEntryDAO {
 		obj.put("name", scheduleEntry.name);
 		obj.put("day", scheduleEntry.day);
 		obj.put("idSchedule", scheduleEntry.idSchedule);
+		obj.put("idArea", scheduleEntry.idArea);
 		obj2.put("scheduleEntry" + i, obj);
 	}
 
@@ -64,8 +65,9 @@ public class ScheduleEntryDAO {
 				session.save(scheduleEntry);
 				finalObj.put("success", "Dodano wpis");
 			} else {
-				String hql = "update ScheduleEntry set name = '" + name + "', timeStart = '" + timeStart + "', timeStop = '" + timeStop + "',day = '" + day + "' where id = " +
-						idScheduleEntry + "";
+				String hql =
+						"update ScheduleEntry set name = '" + name + "', timeStart = '" + timeStart + "', timeStop = '" + timeStop + "',day = '" + day + "', idArea = '" + idArea +
+								"'  where id = " + idScheduleEntry + "";
 				Query q = session.createQuery(hql);
 				q.executeUpdate();
 				finalObj.put("success", "Zaktualizowano wpis");
