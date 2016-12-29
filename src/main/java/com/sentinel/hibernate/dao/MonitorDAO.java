@@ -23,17 +23,22 @@ public class MonitorDAO {
 		}
 	}
 
-	//TODO nie wysyla failure bo wczesniej rzuca watek
+	//TODO nie wysyla failure bo wczesniej rzuca wyjatek
 	public static JSONObject bindChildToParent(String login, String password, String idUser) {
 		JSONObject finalObj = new JSONObject();
 
-		if (ChildDAO.checkIfCredentialsAreCorrect(login, password)) {
-			MonitorDAO.bindChildToParent(Integer.parseInt(idUser), ChildDAO.getChildId(login));
-			finalObj.put("success", "Dodano dziecko");
-		} else {
+		try {
+			if (ChildDAO.checkIfCredentialsAreCorrect(login, password)) {
+				MonitorDAO.bindChildToParent(Integer.parseInt(idUser), ChildDAO.getChildId(login));
+				finalObj.put("success", "Dodano dziecko");
+			} else {
+				finalObj.put("failure", "Nie udało się dodać dziecka");
+			}
+			return finalObj;
+		} catch (Exception e) {
 			finalObj.put("failure", "Nie udało się dodać dziecka");
+			return finalObj;
 		}
-		return finalObj;
 	}
 
 	static void bindChildToParent(Integer idUser, Integer idChild) {
@@ -59,6 +64,8 @@ public class MonitorDAO {
 			Query q = session.createQuery(hql);
 			q.executeUpdate();
 			tx.commit();
+			removeIfDoesntHaveParent(idChild);
+
 		} catch (HibernateException e) {
 			if (tx != null) {
 				tx.rollback();
@@ -70,5 +77,36 @@ public class MonitorDAO {
 		return finalObj;
 	}
 
+	private static boolean hasParent(String idChild) {
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+			String hql = "FROM Monitor where idChild = '" + idChild + "'";
+			List results = session.createQuery(hql).list();
+			session.close();
+			return results.size() > 0;
+		} catch (Exception e) {
+			return false;
+		}
+
+	}
+
+	private static void removeIfDoesntHaveParent(String idChild) {
+
+		Transaction tx = null;
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+			if (!hasParent(idChild)) {
+				tx = session.beginTransaction();
+				String hql = "update Child set idSchedule = '0' where id = ' " + idChild + "')";
+				Query q = session.createQuery(hql);
+				q.executeUpdate();
+				tx.commit();
+			}
+
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+		}
+
+	}
 
 }
