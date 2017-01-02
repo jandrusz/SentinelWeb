@@ -74,6 +74,7 @@ public class ChildDAO {
 			obj.put("lastName", child.lastName);
 			obj.put("login", child.login);
 			obj.put("password", child.password);
+			obj.put("idSchedule", child.idSchedule);
 			finalObj.put("success", obj);
 		} catch (Exception e) {
 			finalObj.put("failure", "Nie ma takiego użytkownika");

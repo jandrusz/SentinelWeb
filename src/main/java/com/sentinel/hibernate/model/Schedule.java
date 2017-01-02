@@ -32,6 +32,13 @@ public class Schedule {
 		this.idUser = idUser;
 	}
 
+
+	public Schedule(Integer id, String name, Integer idUser) {
+		this.id = id;
+		this.name = name;
+		this.idUser = idUser;
+	}
+
 	public Schedule() {
 	}
 

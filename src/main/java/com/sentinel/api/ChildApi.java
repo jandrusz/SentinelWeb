@@ -2,6 +2,7 @@ package com.sentinel.api;
 
 import com.sentinel.hibernate.dao.ChildDAO;
 import com.sentinel.hibernate.dao.LocationDAO;
+import com.sentinel.hibernate.dao.ScheduleDAO;
 import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +29,11 @@ public class ChildApi {
 	public JSONObject saveLocation(@RequestParam("longitude") String longitude, @RequestParam("latitude") String latitude, @RequestParam("day") String day,
 			@RequestParam("time") String time, @RequestParam("idChild") String idChild) {
 		return LocationDAO.saveLocation(longitude, latitude, day, time, idChild);
+	}
+
+	@RequestMapping(value = "/schedules/schedule", method = RequestMethod.POST)
+	public JSONObject getSchedules(@RequestParam("idChild") String idChild) {
+		return ScheduleDAO.getScheduleByIdForChild(idChild);
 	}
 
 }

@@ -173,4 +173,24 @@ public class ScheduleDAO {
 
 	}
 
+	public static JSONObject getScheduleByIdForChild(String idChild) {
+
+		JSONObject finalObj = new JSONObject();
+		JSONObject obj = new JSONObject();
+
+		Schedule schedule = new Schedule();
+		Child child = ChildDAO.getChild(idChild);
+		try {
+			schedule = getChildSchedule(child);
+			obj.put("idSchedule", schedule.id);
+			obj.put("name", schedule.name);
+			obj.put("idUser", schedule.idUser);
+			finalObj.put("success", obj);
+		} catch (Exception e) {
+			finalObj.put("failure", "Nie masz przypisanego harmongramu");
+		}
+
+		return finalObj;
+	}
+
 }
