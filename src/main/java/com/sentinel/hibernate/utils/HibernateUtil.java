@@ -1,12 +1,6 @@
 package com.sentinel.hibernate.utils;
 
-import com.sentinel.hibernate.model.Area;
-import com.sentinel.hibernate.model.Child;
-import com.sentinel.hibernate.model.Location;
-import com.sentinel.hibernate.model.Monitor;
-import com.sentinel.hibernate.model.Schedule;
-import com.sentinel.hibernate.model.ScheduleEntry;
-import com.sentinel.hibernate.model.User;
+import com.sentinel.hibernate.model.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -28,6 +22,7 @@ public class HibernateUtil {
 			configuration.addAnnotatedClass(ScheduleEntry.class);
 			configuration.addAnnotatedClass(Location.class);
 			configuration.addAnnotatedClass(Area.class);
+			configuration.addAnnotatedClass(Message.class);
 
 			ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
 

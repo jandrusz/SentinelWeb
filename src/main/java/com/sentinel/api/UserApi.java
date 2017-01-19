@@ -1,12 +1,6 @@
 package com.sentinel.api;
 
-import com.sentinel.hibernate.dao.AreaDAO;
-import com.sentinel.hibernate.dao.ChildDAO;
-import com.sentinel.hibernate.dao.LocationDAO;
-import com.sentinel.hibernate.dao.MonitorDAO;
-import com.sentinel.hibernate.dao.ScheduleDAO;
-import com.sentinel.hibernate.dao.ScheduleEntryDAO;
-import com.sentinel.hibernate.dao.UserDAO;
+import com.sentinel.hibernate.dao.*;
 import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -112,6 +106,15 @@ public class UserApi {
 	@RequestMapping(value = "/area/getArea", method = RequestMethod.POST)
 	public JSONObject getAreaForScheduleEntry(@RequestParam("idArea") String idArea) {
 		return AreaDAO.getAreaForScheduleEntry(idArea);
+	}
+
+	@RequestMapping(value = "/messageReceiver", method = RequestMethod.POST)
+	public void saveMessage(@RequestParam("idChild") String idChild, @RequestParam("userFirstName") String userFirstName, @RequestParam("message") String message,@RequestParam("time") String time ) {
+		MessageDAO.saveMessage(idChild,userFirstName,message,time);
+//        JSONObject obj = new JSONObject();
+//        obj.put("asd","asd");
+//
+//        return obj;
 	}
 
 }
