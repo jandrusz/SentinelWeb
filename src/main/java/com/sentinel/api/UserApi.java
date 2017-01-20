@@ -109,12 +109,11 @@ public class UserApi {
 	}
 
 	@RequestMapping(value = "/messageReceiver", method = RequestMethod.POST)
-	public void saveMessage(@RequestParam("idChild") String idChild, @RequestParam("userFirstName") String userFirstName, @RequestParam("message") String message,@RequestParam("time") String time ) {
+	public JSONObject saveMessage(@RequestParam("idChild") String idChild, @RequestParam("userFirstName") String userFirstName, @RequestParam("message") String message,@RequestParam("time") String time ) {
 		MessageDAO.saveMessage(idChild,userFirstName,message,time);
-//        JSONObject obj = new JSONObject();
-//        obj.put("asd","asd");
-//
-//        return obj;
+        JSONObject obj = new JSONObject();
+        obj.put("success","Pomyślnie wysłano wiadomość");
+        return obj;
 	}
 
 }

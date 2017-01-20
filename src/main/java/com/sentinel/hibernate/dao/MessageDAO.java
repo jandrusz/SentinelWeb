@@ -28,10 +28,10 @@ public class MessageDAO {
             obj.put("message", message.message);
             obj.put("time", message.time);
 
-            finalObj.put("success", obj);
             setReadToTrue(message.id.toString());
+            finalObj.put("success", obj);
 
-        } catch (HibernateException e) {
+        } catch (HibernateException | IndexOutOfBoundsException e) {
             finalObj.put("failure", "brak wiadomosci");
             return finalObj;
         }

@@ -7,6 +7,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class ScheduleEntryDAO {
@@ -21,18 +22,14 @@ public class ScheduleEntryDAO {
 
 			String scheduleEntries = "from ScheduleEntry where idSchedule = '" + idSchedule + "'";
 			List scheduleEntriesResults = session.createQuery(scheduleEntries).list();
+			JSONArray jsonArray = new JSONArray();
 
 			for (int i = 0; i < scheduleEntriesResults.size(); i++) {
 				ScheduleEntry scheduleEntry = (ScheduleEntry) scheduleEntriesResults.get(i);
-				getScheduleEntry(scheduleEntry, i);
+				jsonArray.add(scheduleEntry);
 			}
 
-//            if (scheduleEntriesResults.size() == 0) {
-//                finalObj.put("failure", "Cos poszło nie tak");
-//                return finalObj;
-//            }
-
-			finalObj.put("success", obj2);
+			finalObj.put("success", jsonArray);
 			return finalObj;
 
 		} catch (HibernateException e) {
@@ -40,7 +37,7 @@ public class ScheduleEntryDAO {
 		}
 	}
 
-
+	@Deprecated
 	private static void getScheduleEntry(ScheduleEntry scheduleEntry, int i) {
 		JSONObject obj = new JSONObject();
 		obj.put("id", scheduleEntry.id);
