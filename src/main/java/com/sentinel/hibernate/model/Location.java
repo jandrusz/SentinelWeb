@@ -18,8 +18,8 @@ public class Location {
 	@Id
 	@GenericGenerator(name = "generator", strategy = "increment")
 	@GeneratedValue(generator = "generator")
-	@Column(name = "id")
-	public Integer id;
+	@Column(name = "id_location")
+	public Integer idLocation;
 
 	@Column(name = "longitude")
 	public Double longitude;

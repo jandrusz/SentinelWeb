@@ -39,7 +39,7 @@ public class ScheduleDAO {
 
 			for (int i = 0; i < schedules.size(); i++) {
 				obj = new JSONObject();
-				obj.put("idSchedule", schedules.get(i).id);
+				obj.put("idSchedule", schedules.get(i).idSchedule);
 				obj.put("name", schedules.get(i).name);
 				obj.put("idUser", schedules.get(i).idUser);
 				obj2.put("schedule" + i, obj);
@@ -182,7 +182,7 @@ public class ScheduleDAO {
 		Child child = ChildDAO.getChild(idChild);
 		try {
 			schedule = getChildSchedule(child);
-			obj.put("idSchedule", schedule.id);
+			obj.put("idSchedule", schedule.idSchedule);
 			obj.put("name", schedule.name);
 			obj.put("idUser", schedule.idUser);
 			finalObj.put("success", obj);

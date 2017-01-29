@@ -38,7 +38,7 @@ public class AreaDAO {
 	public static Area getArea(Integer idArea) {
 
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-			String hql = "from Area where id = '" + idArea + "'";
+			String hql = "from Area where idArea = '" + idArea + "'";
 			List results = session.createQuery(hql).list();
 			Area area = (Area) results.get(0);
 			return area;
@@ -54,10 +54,10 @@ public class AreaDAO {
 		JSONObject finalObj = new JSONObject();
 
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-			String hql = "from Area where id = '" + idArea + "'";
+			String hql = "from Area where idArea = '" + idArea + "'";
 			List results = session.createQuery(hql).list();
 			Area area = (Area) results.get(0);
-			obj.put("id", area.id.toString());
+			obj.put("id", area.idArea.toString());
 			obj.put("latitude", area.latitude.toString());
 			obj.put("longitude", area.longitude.toString());
 			obj.put("radius", area.radius.toString());

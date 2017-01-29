@@ -16,10 +16,10 @@ import org.hibernate.annotations.GenericGenerator;
 public class Child {
 
 	@Id
-	@Column(name = "id")
+	@Column(name = "id_child")
 	@GenericGenerator(name = "generator", strategy = "increment")
 	@GeneratedValue(generator = "generator")
-	public Integer id;
+	public Integer idChild;
 
 	@Column(name = "first_name")
 	public String firstName;

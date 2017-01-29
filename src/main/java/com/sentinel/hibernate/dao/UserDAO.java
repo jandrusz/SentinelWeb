@@ -74,7 +74,7 @@ public class UserDAO {
 		JSONObject finalObj = new JSONObject();
 		try {
 			User user = getUser(login, password);
-			obj.put("id", user.id.toString());
+			obj.put("id", user.idUser.toString());
 			obj.put("firstName", user.firstName);
 			obj.put("lastName", user.lastName);
 			obj.put("login", user.login);
@@ -86,5 +86,17 @@ public class UserDAO {
 		}
 		return finalObj;
 	}
+
+
+	public static String getUserFirstName(Integer id) {
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+			String hql = "select firstName FROM User where idUser = '" + id + "'";
+			List results = session.createQuery(hql).list();
+			return (String) results.get(0);
+		} catch (HibernateException e) {
+			throw new HibernateException(e);
+		}
+	}
+
 
 }

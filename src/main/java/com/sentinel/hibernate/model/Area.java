@@ -18,8 +18,8 @@ public class Area {
 	@Id
 	@GenericGenerator(name = "generator", strategy = "increment")
 	@GeneratedValue(generator = "generator")
-	@Column(name = "id")
-	public Integer id;
+	@Column(name = "id_area")
+	public Integer idArea;
 
 	@Column(name = "longitude")
 	public Double longitude;
@@ -36,38 +36,6 @@ public class Area {
 	public Area(Double longitude, Double latitude, Float radius) {
 		this.longitude = longitude;
 		this.latitude = latitude;
-		this.radius = radius;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public Double getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(Double longitude) {
-		this.longitude = longitude;
-	}
-
-	public Double getLatitude() {
-		return latitude;
-	}
-
-	public void setLatitude(Double latitude) {
-		this.latitude = latitude;
-	}
-
-	public Float getRadius() {
-		return radius;
-	}
-
-	public void setRadius(Float radius) {
 		this.radius = radius;
 	}
 }

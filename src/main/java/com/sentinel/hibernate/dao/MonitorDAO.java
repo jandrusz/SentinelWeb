@@ -95,7 +95,7 @@ public class MonitorDAO {
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 			if (!hasParent(idChild)) {
 				tx = session.beginTransaction();
-				String hql = "update Child set idSchedule = '0' where id = ' " + idChild + "')";
+				String hql = "update Child set idSchedule = '0' where idChild = ' " + idChild + "')";
 				Query q = session.createQuery(hql);
 				q.executeUpdate();
 				tx.commit();

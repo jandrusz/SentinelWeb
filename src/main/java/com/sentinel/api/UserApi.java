@@ -18,7 +18,8 @@ public class UserApi {
 	}
 
 	@RequestMapping(value = "/registerUser", method = RequestMethod.POST)
-	public JSONObject register(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("login") String login,
+	public JSONObject register(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,
+							   @RequestParam("login") String login,
 			@RequestParam("password") String password) {
 		return UserDAO.addUser(firstName, lastName, login, password);
 	}
@@ -109,8 +110,8 @@ public class UserApi {
 	}
 
 	@RequestMapping(value = "/messageReceiver", method = RequestMethod.POST)
-	public JSONObject saveMessage(@RequestParam("idChild") String idChild, @RequestParam("userFirstName") String userFirstName, @RequestParam("message") String message,@RequestParam("time") String time ) {
-		MessageDAO.saveMessage(idChild,userFirstName,message,time);
+	public JSONObject saveMessage(@RequestParam("idChild") String idChild, @RequestParam("idUser") String idUser, @RequestParam("message") String message,@RequestParam("time") String time ) {
+		MessageDAO.saveMessage(idChild,idUser,message,time);
         JSONObject obj = new JSONObject();
         obj.put("success","Pomyślnie wysłano wiadomość");
         return obj;

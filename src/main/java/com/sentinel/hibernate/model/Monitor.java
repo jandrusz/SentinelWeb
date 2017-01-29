@@ -18,8 +18,8 @@ public class Monitor {
 	@Id
 	@GenericGenerator(name = "generator", strategy = "increment")
 	@GeneratedValue(generator = "generator")
-	@Column(name = "id")
-	public Integer id;
+	@Column(name = "id_monitor")
+	public Integer idMonitor;
 
 	@Column(name = "id_user")
 	public Integer idUser;

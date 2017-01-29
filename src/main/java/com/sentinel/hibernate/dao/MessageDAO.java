@@ -23,12 +23,14 @@ public class MessageDAO {
 
             message = (Message) messages.get(0);
 
-            obj.put("id", message.id.toString());
-            obj.put("textFrom", message.textFrom);
+            String textFrom = UserDAO.getUserFirstName(message.idUser);
+
+            obj.put("id", message.idMessage.toString());
+            obj.put("textFrom", textFrom);
             obj.put("message", message.message);
             obj.put("time", message.time);
 
-            setReadToTrue(message.id.toString());
+            setReadToTrue(message.idMessage.toString());
             finalObj.put("success", obj);
 
         } catch (HibernateException | IndexOutOfBoundsException e) {
@@ -42,7 +44,7 @@ public class MessageDAO {
         Transaction tx = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
                 tx = session.beginTransaction();
-                String hql = "update Message set read = '1' where id = ' " + id + "')";
+                String hql = "update Message set read = '1' where idMessage = ' " + id + "')";
                 Query q = session.createQuery(hql);
                 q.executeUpdate();
                 tx.commit();
@@ -53,11 +55,11 @@ public class MessageDAO {
         }
     }
 
-    public static void saveMessage(String idChild, String userFirstName, String message, String time){
+    public static void saveMessage(String idChild, String id, String message, String time){
         Transaction tx = null;
             try (Session session = HibernateUtil.getSessionFactory().openSession()) {
                 tx = session.beginTransaction();
-                Message child = new Message(userFirstName,message,"0",Integer.parseInt(idChild), time);
+                Message child = new Message(Integer.parseInt(id),message,"0",Integer.parseInt(idChild), time);
                 session.save(child);
                 tx.commit();
             } catch (HibernateException e) {

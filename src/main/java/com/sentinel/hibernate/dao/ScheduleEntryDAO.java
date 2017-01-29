@@ -40,11 +40,11 @@ public class ScheduleEntryDAO {
 	@Deprecated
 	private static void getScheduleEntry(ScheduleEntry scheduleEntry, int i) {
 		JSONObject obj = new JSONObject();
-		obj.put("id", scheduleEntry.id);
+		obj.put("id", scheduleEntry.idScheduleEntry);
 		obj.put("timeStart", scheduleEntry.timeStart);
 		obj.put("timeStop", scheduleEntry.timeStop);
 		obj.put("name", scheduleEntry.name);
-		obj.put("day", scheduleEntry.day);
+		obj.put("day", scheduleEntry.dayOfWeek);
 		obj.put("idSchedule", scheduleEntry.idSchedule);
 		obj.put("idArea", scheduleEntry.idArea);
 		obj2.put("scheduleEntry" + i, obj);
@@ -63,8 +63,8 @@ public class ScheduleEntryDAO {
 				finalObj.put("success", "Dodano wpis");
 			} else {
 				String hql =
-						"update ScheduleEntry set name = '" + name + "', timeStart = '" + timeStart + "', timeStop = '" + timeStop + "',day = '" + day + "', idArea = '" + idArea +
-								"'  where id = " + idScheduleEntry + "";
+						"update ScheduleEntry set name = '" + name + "', timeStart = '" + timeStart + "', timeStop = '" + timeStop + "',dayOfWeek = '" + day + "', idArea = '" + idArea +
+								"'  where idScheduleEntry = " + idScheduleEntry + "";
 				Query q = session.createQuery(hql);
 				q.executeUpdate();
 				finalObj.put("success", "Zaktualizowano wpis");
@@ -103,7 +103,7 @@ public class ScheduleEntryDAO {
 		Transaction tx = null;
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 			tx = session.beginTransaction();
-			String hql = "delete from ScheduleEntry where id = '" + scheduleEntryId + "'";
+			String hql = "delete from ScheduleEntry where idScheduleEntry = '" + scheduleEntryId + "'";
 			Query q = session.createQuery(hql);
 			q.executeUpdate();
 			tx.commit();
@@ -117,11 +117,14 @@ public class ScheduleEntryDAO {
 		return finalObj;
 	}
 
-	public static ScheduleEntry getScheduleEntryToCheckLocalization(String idSchedule, String day, int hour, int minutes) {
-
+	public static ScheduleEntry getScheduleEntryToCheckLocalization(String idSchedule, String day, Integer hour, int minutes) {
+		String sHour;
+		if(hour<10)
+		sHour = "0" + hour.toString();
+		else sHour = hour.toString();
 
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-			String hql = "FROM ScheduleEntry where idSchedule = '" + idSchedule + "' and day= '" + day + "' and '" + hour + ":" + minutes + "' between timeStart and timeStop";
+			String hql = "FROM ScheduleEntry where idSchedule = '" + idSchedule + "' and dayOfWeek= '" + day + "' and '" + sHour + ":" + minutes + "' between timeStart and timeStop";
 			List results = session.createQuery(hql).list();
 			return (ScheduleEntry) results.get(0);
 		} catch (HibernateException e) {

@@ -16,9 +16,12 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import javax.persistence.Query;
 
 public class LocationDAO {
 
@@ -50,7 +53,7 @@ public class LocationDAO {
 		Location location;
 
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-			String hql = "from Location where id = (select max(id) from Location where idChild = '" + idChild + "')";
+			String hql = "from Location where idLocation = (select max(idLocation) from Location where idChild = '" + idChild + "')";
 			List results = session.createQuery(hql).list();
 			location = (Location) results.get(0);
 		} catch (HibernateException e) {
@@ -65,8 +68,9 @@ public class LocationDAO {
 		JSONObject finalObj = new JSONObject();
 
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-			String hql = "from Location where rownum <=5 and idChild = '" + idChild + "' order by id desc"; //TODO najwiekszych id albo najnowszych czasow/dni
-			List results = session.createQuery(hql).list();
+			String hql = "from Location where idChild = '" + idChild + "' order by idLocation desc"; //TODO najwiekszych id albo najnowszych czasow/dni
+			Query query = session.createQuery(hql);
+			List results = query.getResultList();
 			List<Location> locations = new ArrayList<>();
 			locations = results;
 
@@ -75,18 +79,18 @@ public class LocationDAO {
 				return finalObj;
 			}
 
-			for (int i = 0; i < locations.size(); i++) {
-				String hql2 = "from Location where id = '" + locations.get(i).id + "'";
-				List results2 = session.createQuery(hql2).list();
-				Location location = (Location) results2.get(0);
+			for (int i = 0; i < 5 && i<locations.size(); i++) {
+//				String hql2 = "from Location where idLocation = '" + locations.get(i).idLocation + "'";
+//				List results2 = session.createQuery(hql2).list();
+//				Location location = (Location) results2.get(0);
 				JSONObject obj = new JSONObject();
 
 
-				obj.put("id", location.id.toString());
-				obj.put("latitude", location.latitude);
-				obj.put("longitude", location.longitude);
-				obj.put("day", location.day);
-				obj.put("time", location.time);
+				obj.put("id", locations.get(i).idLocation.toString());
+				obj.put("latitude", locations.get(i).latitude);
+				obj.put("longitude", locations.get(i).longitude);
+				obj.put("day", locations.get(i).day);
+				obj.put("time", locations.get(i).time);
 				obj2.put("location" + i, obj);
 			}
 			finalObj.put("success", obj2);
@@ -160,13 +164,13 @@ public class LocationDAO {
 			}
 
 			for (int i = 0; i < locations.size(); i++) {
-				String hql2 = "from Location where id = '" + locations.get(i).id + "'";
+				String hql2 = "from Location where idLocation = '" + locations.get(i).idLocation + "'";
 				List results2 = session.createQuery(hql2).list();
 				Location location = (Location) results2.get(0);
 				JSONObject obj = new JSONObject();
 
 
-				obj.put("id", location.id.toString());
+				obj.put("id", location.idLocation.toString());
 				obj.put("latitude", location.latitude);
 				obj.put("longitude", location.longitude);
 				obj.put("day", location.day);

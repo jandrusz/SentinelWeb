@@ -18,8 +18,8 @@ public class Schedule {
 	@Id
 	@GenericGenerator(name = "generator", strategy = "increment")
 	@GeneratedValue(generator = "generator")
-	@Column(name = "id")
-	public Integer id;
+	@Column(name = "id_schedule")
+	public Integer idSchedule;
 
 	@Column(name = "name")
 	public String name;
@@ -33,8 +33,8 @@ public class Schedule {
 	}
 
 
-	public Schedule(Integer id, String name, Integer idUser) {
-		this.id = id;
+	public Schedule(Integer idSchedule, String name, Integer idUser) {
+		this.idSchedule = idSchedule;
 		this.name = name;
 		this.idUser = idUser;
 	}
@@ -44,28 +44,20 @@ public class Schedule {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
 
 		Schedule schedule = (Schedule) o;
 
-		if (id != null ? !id.equals(schedule.id) : schedule.id != null) {
-			return false;
-		}
-		if (name != null ? !name.equals(schedule.name) : schedule.name != null) {
-			return false;
-		}
+		if (idSchedule != null ? !idSchedule.equals(schedule.idSchedule) : schedule.idSchedule != null) return false;
+		if (name != null ? !name.equals(schedule.name) : schedule.name != null) return false;
 		return idUser != null ? idUser.equals(schedule.idUser) : schedule.idUser == null;
 
 	}
 
 	@Override
 	public int hashCode() {
-		int result = id != null ? id.hashCode() : 0;
+		int result = idSchedule != null ? idSchedule.hashCode() : 0;
 		result = 31 * result + (name != null ? name.hashCode() : 0);
 		result = 31 * result + (idUser != null ? idUser.hashCode() : 0);
 		return result;

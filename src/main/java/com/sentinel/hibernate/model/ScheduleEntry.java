@@ -16,8 +16,8 @@ public class ScheduleEntry {
 	@Id
 	@GenericGenerator(name = "generator", strategy = "increment")
 	@GeneratedValue(generator = "generator")
-	@Column(name = "id")
-	public Integer id;
+	@Column(name = "id_schedule_entry")
+	public Integer idScheduleEntry;
 
 	@Column(name = "name")
 	public String name;
@@ -28,8 +28,8 @@ public class ScheduleEntry {
 	@Column(name = "time_stop")
 	public String timeStop;
 
-	@Column(name = "day")
-	public String day;
+	@Column(name = "day_of_week")
+	public String dayOfWeek;
 
 	@Column(name = "id_schedule")
 	public Integer idSchedule;
@@ -37,11 +37,11 @@ public class ScheduleEntry {
 	@Column(name = "id_area")
 	public Integer idArea;
 
-	public ScheduleEntry(String name, String timeStart, String timeStop, String day, Integer idSchedule, Integer idArea) {
+	public ScheduleEntry(String name, String timeStart, String timeStop, String dayOfWeek, Integer idSchedule, Integer idArea) {
 		this.name = name;
 		this.timeStart = timeStart;
 		this.timeStop = timeStop;
-		this.day = day;
+		this.dayOfWeek = dayOfWeek;
 		this.idSchedule = idSchedule;
 		this.idArea = idArea;
 	}

@@ -38,7 +38,7 @@ public class ChildDAO {
 				List results2 = session.createQuery(hql2).list();
 				Child child = (Child) results2.get(0);
 				JSONObject obj = new JSONObject();
-				obj.put("id", child.id.toString());
+				obj.put("id", child.idChild.toString());
 				obj.put("firstName", child.firstName);
 				obj.put("lastName", child.lastName);
 				obj.put("login", child.login);
@@ -69,7 +69,7 @@ public class ChildDAO {
 		JSONObject finalObj = new JSONObject();
 		try {
 			Child child = getChild(login, password);
-			obj.put("id", child.id.toString());
+			obj.put("id", child.idChild.toString());
 			obj.put("firstName", child.firstName);
 			obj.put("lastName", child.lastName);
 			obj.put("login", child.login);

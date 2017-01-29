@@ -13,13 +13,13 @@ import javax.persistence.*;
 public class Message {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id_message")
     @GenericGenerator(name = "generator", strategy = "increment")
     @GeneratedValue(generator = "generator")
-    public Integer id;
+    public Integer idMessage;
 
-    @Column(name = "text_from")
-    public String textFrom;
+    @Column(name = "id_user")
+    public Integer idUser;
 
     @Column(name = "message")
     public String message;
@@ -36,8 +36,8 @@ public class Message {
     public Message() {
     }
 
-    public Message(String textFrom, String message, String read, Integer idChild, String time) {
-        this.textFrom = textFrom;
+    public Message(Integer idUser, String message, String read, Integer idChild, String time) {
+        this.idUser = idUser;
         this.message = message;
         this.read = read;
         this.idChild = idChild;
