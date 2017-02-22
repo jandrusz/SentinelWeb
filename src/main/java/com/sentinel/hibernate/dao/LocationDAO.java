@@ -68,7 +68,7 @@ public class LocationDAO {
 		JSONObject finalObj = new JSONObject();
 
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-			String hql = "from Location where idChild = '" + idChild + "' order by idLocation desc"; //TODO najwiekszych id albo najnowszych czasow/dni
+			String hql = "from Location where idChild = '" + idChild + "' order by idLocation desc";
 			Query query = session.createQuery(hql);
 			List results = query.getResultList();
 			List<Location> locations = new ArrayList<>();
