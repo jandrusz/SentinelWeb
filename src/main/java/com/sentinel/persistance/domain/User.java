@@ -1,20 +1,22 @@
 package com.sentinel.persistance.domain;
 
-import lombok.Builder;
 import lombok.Data;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Data
-@Entity
+@Entity(name = "Users")
 public class User {
 
     @Id
     public Integer id;
 
+    @Column(name = "first_name")
     public String firstName;
 
+    @Column(name = "last_name")
     public String lastName;
 
     public String login;
