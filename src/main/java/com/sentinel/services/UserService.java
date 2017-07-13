@@ -1,9 +1,7 @@
 package com.sentinel.services;
 
 
-import com.google.common.collect.Lists;
 import com.sentinel.persistance.domain.User;
-//import com.sentinel.persistance.repositories.UserDao;
 import com.sentinel.persistance.repositories.UserDao;
 import org.springframework.stereotype.Component;
 
@@ -26,7 +24,7 @@ public class UserService {
 
     public User saveUser(String login) {
         User user = new User();
-        user.setId(0);
+        user.setIdUser(0);
         user.setLogin(login);
         user.setFirstName(login);
         user.setLastName(login);

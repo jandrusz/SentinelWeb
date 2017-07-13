@@ -11,7 +11,8 @@ import javax.persistence.Id;
 public class User {
 
     @Id
-    public Integer id;
+    @Column(name = "id_user")
+    public Integer idUser;
 
     @Column(name = "first_name")
     public String firstName;

@@ -1,0 +1,142 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="Jakub (generated)" id="1499967896368-1">
+        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="9999999999999999999999999999" minValue="1" ordered="false" sequenceName="TEMPLATE_ID" startValue="221"/>
+    </changeSet>
+    <changeSet author="Jakub (generated)" id="1499967896368-2">
+        <createTable tableName="AREAS">
+            <column name="ID_AREA" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LONGITUDE" type="NUMBER(10, 7)"/>
+            <column name="LATITUDE" type="NUMBER(10, 7)"/>
+            <column name="RADIUS" type="NUMBER(12, 7)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Jakub (generated)" id="1499967896368-3">
+        <createTable tableName="CHILDREN">
+            <column name="ID_CHILD" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FIRST_NAME" type="VARCHAR2(30 BYTE)"/>
+            <column name="LAST_NAME" type="VARCHAR2(30 BYTE)"/>
+            <column name="LOGIN" type="VARCHAR2(30 BYTE)"/>
+            <column name="PASSWORD" type="VARCHAR2(30 BYTE)"/>
+            <column name="ID_SCHEDULE" type="NUMBER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Jakub (generated)" id="1499967896368-4">
+        <createTable tableName="LOCATIONS">
+            <column name="ID_LOCATION" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LONGITUDE" type="NUMBER(10, 7)"/>
+            <column name="LATITUDE" type="NUMBER(10, 7)"/>
+            <column name="DAY" type="VARCHAR2(30 BYTE)"/>
+            <column name="TIME" type="VARCHAR2(30 BYTE)"/>
+            <column name="ID_CHILD" type="NUMBER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Jakub (generated)" id="1499967896368-5">
+        <createTable tableName="MESSAGES">
+            <column name="ID_MESSAGE" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ID_CHILD" type="NUMBER"/>
+            <column name="ID_USER" type="NUMBER"/>
+            <column name="MESSAGE" type="VARCHAR2(50 BYTE)"/>
+            <column name="READ" type="CHAR(1 BYTE)"/>
+            <column name="TIME" type="VARCHAR2(30 BYTE)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Jakub (generated)" id="1499967896368-6">
+        <createTable tableName="MONITORS">
+            <column name="ID_MONITOR" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ID_USER" type="NUMBER"/>
+            <column name="ID_CHILD" type="NUMBER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Jakub (generated)" id="1499967896368-7">
+        <createTable tableName="SCHEDULES">
+            <column name="ID_SCHEDULE" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR2(30 BYTE)"/>
+            <column name="ID_USER" type="NUMBER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Jakub (generated)" id="1499967896368-8">
+        <createTable tableName="SCHEDULE_ENTRIES">
+            <column name="ID_SCHEDULE_ENTRY" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR2(30 BYTE)"/>
+            <column name="TIME_START" type="VARCHAR2(30 BYTE)"/>
+            <column name="TIME_STOP" type="VARCHAR2(30 BYTE)"/>
+            <column name="DAY_OF_WEEK" type="VARCHAR2(30 BYTE)"/>
+            <column name="ID_SCHEDULE" type="NUMBER"/>
+            <column name="ID_AREA" type="NUMBER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Jakub (generated)" id="1499967896368-9">
+        <createTable tableName="USERS">
+            <column name="ID_USER" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FIRST_NAME" type="VARCHAR2(30 BYTE)"/>
+            <column name="LAST_NAME" type="VARCHAR2(30 BYTE)"/>
+            <column name="LOGIN" type="VARCHAR2(30 BYTE)"/>
+            <column name="PASSWORD" type="VARCHAR2(30 BYTE)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Jakub (generated)" id="1499967896368-10">
+        <createIndex indexName="SYS_C007036" tableName="USERS" unique="true">
+            <column name="ID_USER"/>
+        </createIndex>
+        <addPrimaryKey columnNames="ID_USER" constraintName="SYS_C007036" forIndexName="SYS_C007036" tableName="USERS"/>
+    </changeSet>
+    <changeSet author="Jakub (generated)" id="1499967896368-11">
+        <createIndex indexName="SYS_C007038" tableName="CHILDREN" unique="true">
+            <column name="ID_CHILD"/>
+        </createIndex>
+        <addPrimaryKey columnNames="ID_CHILD" constraintName="SYS_C007038" forIndexName="SYS_C007038" tableName="CHILDREN"/>
+    </changeSet>
+    <changeSet author="Jakub (generated)" id="1499967896368-12">
+        <createIndex indexName="SYS_C007040" tableName="MONITORS" unique="true">
+            <column name="ID_MONITOR"/>
+        </createIndex>
+        <addPrimaryKey columnNames="ID_MONITOR" constraintName="SYS_C007040" forIndexName="SYS_C007040" tableName="MONITORS"/>
+    </changeSet>
+    <changeSet author="Jakub (generated)" id="1499967896368-13">
+        <createIndex indexName="SYS_C007042" tableName="SCHEDULES" unique="true">
+            <column name="ID_SCHEDULE"/>
+        </createIndex>
+        <addPrimaryKey columnNames="ID_SCHEDULE" constraintName="SYS_C007042" forIndexName="SYS_C007042" tableName="SCHEDULES"/>
+    </changeSet>
+    <changeSet author="Jakub (generated)" id="1499967896368-14">
+        <createIndex indexName="SYS_C007044" tableName="SCHEDULE_ENTRIES" unique="true">
+            <column name="ID_SCHEDULE_ENTRY"/>
+        </createIndex>
+        <addPrimaryKey columnNames="ID_SCHEDULE_ENTRY" constraintName="SYS_C007044" forIndexName="SYS_C007044" tableName="SCHEDULE_ENTRIES"/>
+    </changeSet>
+    <changeSet author="Jakub (generated)" id="1499967896368-15">
+        <createIndex indexName="SYS_C007046" tableName="LOCATIONS" unique="true">
+            <column name="ID_LOCATION"/>
+        </createIndex>
+        <addPrimaryKey columnNames="ID_LOCATION" constraintName="SYS_C007046" forIndexName="SYS_C007046" tableName="LOCATIONS"/>
+    </changeSet>
+    <changeSet author="Jakub (generated)" id="1499967896368-16">
+        <createIndex indexName="SYS_C007048" tableName="AREAS" unique="true">
+            <column name="ID_AREA"/>
+        </createIndex>
+        <addPrimaryKey columnNames="ID_AREA" constraintName="SYS_C007048" forIndexName="SYS_C007048" tableName="AREAS"/>
+    </changeSet>
+    <changeSet author="Jakub (generated)" id="1499967896368-17">
+        <createIndex indexName="SYS_C007049" tableName="MESSAGES" unique="true">
+            <column name="ID_MESSAGE"/>
+        </createIndex>
+        <addPrimaryKey columnNames="ID_MESSAGE" constraintName="SYS_C007049" forIndexName="SYS_C007049" tableName="MESSAGES"/>
+    </changeSet>
+</databaseChangeLog>
