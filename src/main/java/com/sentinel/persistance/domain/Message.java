@@ -15,18 +15,28 @@ import javax.persistence.Id;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "schedules")
-public class Schedule {
+@Entity(name = "messages")
+public class Message {
 
     @Id
+    @Column(name = "id_message")
     @GenericGenerator(name = "generator", strategy = "increment")
     @GeneratedValue(generator = "generator")
-    @Column(name = "id_schedule")
-    private Integer idSchedule;
-
-    @Column(name = "name")
-    private String name;
+    private Integer idMessage;
 
     @Column(name = "id_user")
     private Integer idUser;
+
+    @Column(name = "message")
+    private String message;
+
+    @Column(name = "read")
+    private String read;
+
+    @Column(name = "id_child")
+    private Integer idChild;
+
+    @Column(name = "time")
+    private String time;
+
 }

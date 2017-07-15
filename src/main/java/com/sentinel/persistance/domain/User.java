@@ -15,23 +15,23 @@ import javax.persistence.Id;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "Users")
+@Entity(name = "users")
 public class User {
 
     @Id
     @GenericGenerator(name = "generator", strategy = "increment")
     @GeneratedValue(generator = "generator")
     @Column(name = "id_user")
-    public Integer idUser;
+    private Integer idUser;
 
     @Column(name = "first_name")
-    public String firstName;
+    private String firstName;
 
     @Column(name = "last_name")
-    public String lastName;
+    private String lastName;
 
-    public String login;
+    private String login;
 
-    public String password;
+    private String password;
 
 }

@@ -11,22 +11,24 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "schedules")
-public class Schedule {
+@Entity(name = "monitors")
+public class Monitor {
 
     @Id
     @GenericGenerator(name = "generator", strategy = "increment")
     @GeneratedValue(generator = "generator")
-    @Column(name = "id_schedule")
-    private Integer idSchedule;
-
-    @Column(name = "name")
-    private String name;
+    @Column(name = "id_monitor")
+    private Integer idMonitor;
 
     @Column(name = "id_user")
     private Integer idUser;
+
+    @Column(name = "id_child")
+    private Integer idChild;
+
 }

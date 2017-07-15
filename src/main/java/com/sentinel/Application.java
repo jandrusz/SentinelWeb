@@ -7,7 +7,7 @@ import org.springframework.boot.context.web.SpringBootServletInitializer;
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer {
 
-	private static final String SPRING_CONFIG_FILE = "spring.config.name:application-sentinel";
+    private static final String SPRING_CONFIG_FILE = "spring.config.name:application-sentinel";
 
     public static void main(String[] args) {
         new Application()

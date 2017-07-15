@@ -15,18 +15,22 @@ import javax.persistence.Id;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "schedules")
-public class Schedule {
+@Entity(name = "areas")
+public class Area {
 
     @Id
     @GenericGenerator(name = "generator", strategy = "increment")
     @GeneratedValue(generator = "generator")
-    @Column(name = "id_schedule")
-    private Integer idSchedule;
+    @Column(name = "id_area")
+    private Integer idArea;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "longitude")
+    private Double longitude;
 
-    @Column(name = "id_user")
-    private Integer idUser;
+    @Column(name = "latitude")
+    private Double latitude;
+
+    @Column(name = "radius")
+    private Float radius;
+
 }
