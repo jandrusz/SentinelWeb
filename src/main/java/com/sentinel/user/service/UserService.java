@@ -20,7 +20,10 @@ public class UserService {
     }
 
     public User getUserByLoginAndPassword(User user) {
-        return userRepository.getUserByLoginAndPassword(user.getLogin(), user.getPassword());
+        if (validateCredentials(user)) {
+            return userRepository.getUserByLoginAndPassword(user.getLogin(), user.getPassword());
+        }
+        return null;
     }
 
     public User getUserByIdUser(Integer idUser) {
@@ -34,6 +37,10 @@ public class UserService {
             return true;
         }
         return false;
+    }
+
+    private boolean validateCredentials(User user) {
+        return Objects.nonNull(user.getLogin()) && Objects.nonNull(user.getPassword());
     }
 
 }

@@ -32,8 +32,14 @@ public class ChildService {
     }
 
     public Child getChildByLoginAndPassword(Child child) {
-        return childRepository.getChildByLoginAndPassword(child.getLogin(), child.getPassword());
+        if (validateCredentials(child)) {
+            return childRepository.getChildByLoginAndPassword(child.getLogin(), child.getPassword());
+        }
+        return null;
     }
 
+    private boolean validateCredentials(Child child) {
+        return Objects.nonNull(child.getLogin()) && Objects.nonNull(child.getPassword());
+    }
 
 }

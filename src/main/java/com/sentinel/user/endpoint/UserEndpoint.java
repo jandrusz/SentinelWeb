@@ -32,12 +32,12 @@ public class UserEndpoint {
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public User logIn(User user) {
+    public User login(User user) {
         return userService.getUserByLoginAndPassword(user);
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
-    public boolean saveUser(User user) {
+    public boolean register(User user) {
         return userService.saveUser(user);
     }
 

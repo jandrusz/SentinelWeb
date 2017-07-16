@@ -20,7 +20,7 @@ public class ChildEndpoint {
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public Child logIn(Child child) {
+    public Child login(Child child) {
         return childService.getChildByLoginAndPassword(child);
     }
 
