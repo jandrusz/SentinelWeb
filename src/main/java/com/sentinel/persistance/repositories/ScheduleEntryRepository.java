@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import javax.transaction.Transactional;
 
 @Transactional
-interface ScheduleEntryRepository extends JpaRepository<ScheduleEntry, Integer> {
+public interface ScheduleEntryRepository extends JpaRepository<ScheduleEntry, Integer> {
 }

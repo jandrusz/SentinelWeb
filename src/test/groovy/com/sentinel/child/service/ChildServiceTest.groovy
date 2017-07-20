@@ -63,6 +63,40 @@ class ChildServiceTest extends Specification {
         0 * childRepository.getChildByLoginAndPassword(_, _) >> new Child()
     }
 
+    def "should get child by id"() {
+        when:
+        Child child = childService.getChildByIdChild(0)
+
+        then:
+        1 * childRepository.getChildByIdChild(_) >> new Child()
+        child != null
+    }
+
+    def "should save child"() {
+        given:
+        Child child = new Child(login: Fields.LOGIN, password: Fields.PASSWORD)
+
+        when:
+        boolean isSaved = childService.saveChild(child)
+
+        then:
+        1 * childRepository.save(_)
+        isSaved
+    }
+
+    def "should not save child"() {
+        given:
+        Child child = new Child(login: Fields.LOGIN, password: Fields.PASSWORD)
+        childRepository.getChildByLoginAndPassword(_, _) >> new Child()
+
+        when:
+        boolean isSaved = childService.saveChild(child)
+
+        then:
+        0 * childRepository.save(_)
+        !isSaved
+    }
+
     class Fields {
         private static LOGIN = "login"
         private static PASSWORD = "password"

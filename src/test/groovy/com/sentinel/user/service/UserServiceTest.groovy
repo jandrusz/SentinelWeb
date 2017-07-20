@@ -62,6 +62,40 @@ class UserServiceTest extends Specification {
         0 * userRepository.getUserByLoginAndPassword(_, _) >> new User()
     }
 
+    def "should get user by id"() {
+        when:
+        User user = userService.getUserByIdUser(0)
+
+        then:
+        1 * userRepository.getUserByIdUser(_) >> new User()
+        user != null
+    }
+
+    def "should save user"() {
+        given:
+        User user = new User(login: Fields.LOGIN, password: Fields.PASSWORD)
+
+        when:
+        boolean isSaved = userService.saveUser(user)
+
+        then:
+        1 * userRepository.save(_)
+        isSaved
+    }
+
+    def "should not save user"() {
+        given:
+        User user = new User(login: Fields.LOGIN, password: Fields.PASSWORD)
+        userRepository.getUserByLoginAndPassword(_, _) >> new User()
+
+        when:
+        boolean isSaved = userService.saveUser(user)
+
+        then:
+        0 * userRepository.save(_)
+        !isSaved
+    }
+
     class Fields {
         private static LOGIN = "login"
         private static PASSWORD = "password"
