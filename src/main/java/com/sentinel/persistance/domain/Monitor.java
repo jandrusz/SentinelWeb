@@ -1,15 +1,14 @@
 package com.sentinel.persistance.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
 
 @Data
@@ -19,16 +18,16 @@ import javax.persistence.Id;
 @Entity(name = "monitors")
 public class Monitor {
 
-    @Id
-    @GenericGenerator(name = "generator", strategy = "increment")
-    @GeneratedValue(generator = "generator")
-    @Column(name = "id_monitor")
-    private Integer idMonitor;
+	@Id
+	@GenericGenerator(name = "generator", strategy = "increment")
+	@GeneratedValue(generator = "generator")
+	@Column(name = "id_monitor")
+	private Integer idMonitor;
 
-    @Column(name = "id_user")
-    private Integer idUser;
+	@Column(name = "id_user")
+	private Integer idUser;
 
-    @Column(name = "id_child")
-    private Integer idChild;
+	@Column(name = "id_child")
+	private Integer idChild;
 
 }

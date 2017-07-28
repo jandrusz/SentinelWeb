@@ -1,15 +1,14 @@
 package com.sentinel.persistance.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
 @Data
 @Builder
@@ -18,19 +17,19 @@ import javax.persistence.Id;
 @Entity(name = "areas")
 public class Area {
 
-    @Id
-    @GenericGenerator(name = "generator", strategy = "increment")
-    @GeneratedValue(generator = "generator")
-    @Column(name = "id_area")
-    private Integer idArea;
+	@Id
+	@GenericGenerator(name = "generator", strategy = "increment")
+	@GeneratedValue(generator = "generator")
+	@Column(name = "id_area")
+	private Integer idArea;
 
-    @Column(name = "longitude")
-    private Double longitude;
+	@Column(name = "longitude")
+	private Double longitude;
 
-    @Column(name = "latitude")
-    private Double latitude;
+	@Column(name = "latitude")
+	private Double latitude;
 
-    @Column(name = "radius")
-    private Float radius;
+	@Column(name = "radius")
+	private Float radius;
 
 }
