@@ -20,10 +20,7 @@ public class UserService {
     }
 
     public User getUserByLoginAndPassword(User user) {
-        if (validateCredentials(user)) {
-            return userRepository.getUserByLoginAndPassword(user.getLogin(), user.getPassword());
-        }
-        return null;
+        return validateCredentials(user) ? userRepository.getUserByLoginAndPassword(user.getLogin(), user.getPassword()) : null;
     }
 
     public User getUserByIdUser(Integer idUser) {
@@ -31,12 +28,8 @@ public class UserService {
     }
 
     @Transactional
-    public boolean saveUser(User user) {
-        if (Objects.isNull(getUserByLoginAndPassword(user))) {
-            userRepository.save(user);
-            return true;
-        }
-        return false;
+    public User saveUser(User user) {
+        return Objects.isNull(getUserByLoginAndPassword(user)) ? userRepository.save(user) : null;
     }
 
     private boolean validateCredentials(User user) {

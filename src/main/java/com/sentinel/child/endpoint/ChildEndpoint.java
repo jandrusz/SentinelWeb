@@ -25,7 +25,7 @@ public class ChildEndpoint {
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
-    public boolean register(Child child) {
+    public Child register(Child child) {
         return childService.saveChild(child);
     }
 }

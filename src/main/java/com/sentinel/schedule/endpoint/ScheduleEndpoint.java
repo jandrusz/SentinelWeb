@@ -33,7 +33,7 @@ public class ScheduleEndpoint {
     }
 
 
-    @RequestMapping(value = "schedules", method = RequestMethod.POST)
+    @RequestMapping(value = "schedules", method = RequestMethod.GET)
     public List<Schedule> getSchedules(User user) {
         return scheduleService.getSchedulesByIdUser(user.getIdUser());
     }

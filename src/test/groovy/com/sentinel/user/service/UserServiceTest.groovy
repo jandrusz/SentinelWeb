@@ -76,14 +76,14 @@ class UserServiceTest extends Specification {
         User user = new User(login: Fields.LOGIN, password: Fields.PASSWORD)
 
         when:
-        boolean isSaved = userService.saveUser(user)
+        User returnedUser = userService.saveUser(user)
 
         then:
-        1 * userRepository.save(_)
-        isSaved
+        1 * userRepository.save(_) >> new User()
+        returnedUser != null
     }
 
-    def "should not save user"() {
+    def "should not save user"() { //TODO need to check
         given:
         User user = new User(login: Fields.LOGIN, password: Fields.PASSWORD)
         userRepository.getUserByLoginAndPassword(_, _) >> new User()

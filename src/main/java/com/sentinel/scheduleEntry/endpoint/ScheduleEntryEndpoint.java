@@ -31,11 +31,9 @@ public class ScheduleEntryEndpoint {
         return scheduleEntryService.getScheduleEntriesByIdSchedule(schedule);
     }
 
-    //    @RequestMapping(value = "addScheduleEntry", method = RequestMethod.POST)
-//    public JSONObject addOrEditScheduleEntry(@RequestParam("name") String name, @RequestParam("timeStart") String timeStart, @RequestParam("timeStop") String timeStop,
-//                                             @RequestParam("day") String day, @RequestParam("idSchedule") String idSchedule, @RequestParam("idScheduleEntry") String idScheduleEntry,
-//                                             @RequestParam("idArea") String idArea) {
-//        return ScheduleEntryDAO.addOrEditScheduleEntry(name, timeStart, timeStop, day, idSchedule, idScheduleEntry, idArea);
-//    }
-//
+    @RequestMapping(value = "addScheduleEntry", method = RequestMethod.POST)
+    public ScheduleEntry addOrEditScheduleEntry(ScheduleEntry scheduleEntry) {
+        return scheduleEntryService.saveScheduleEntryOrUpdate(scheduleEntry);
+    }
+
 }

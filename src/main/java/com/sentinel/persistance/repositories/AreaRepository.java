@@ -8,5 +8,9 @@ import javax.transaction.Transactional;
 @Transactional
 public interface AreaRepository extends JpaRepository<Area, Integer> {
 
+    Area getAreaByIdArea(Integer idArea);
+
+    @Override
+    Area save(Area area);
 
 }

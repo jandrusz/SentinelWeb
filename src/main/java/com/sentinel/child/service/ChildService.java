@@ -19,12 +19,8 @@ public class ChildService {
     }
 
     @Transactional
-    public boolean saveChild(Child child) {
-        if (Objects.isNull(getChildByLoginAndPassword(child))) {
-            childRepository.save(child);
-            return true;
-        }
-        return false;
+    public Child saveChild(Child child) {
+        return Objects.isNull(getChildByLoginAndPassword(child)) ? childRepository.save(child) : null;
     }
 
     public Child getChildByIdChild(Integer idChild) {
@@ -32,10 +28,7 @@ public class ChildService {
     }
 
     public Child getChildByLoginAndPassword(Child child) {
-        if (validateCredentials(child)) {
-            return childRepository.getChildByLoginAndPassword(child.getLogin(), child.getPassword());
-        }
-        return null;
+        return validateCredentials(child) ? childRepository.getChildByLoginAndPassword(child.getLogin(), child.getPassword()) : null;
     }
 
     public boolean setSchedule(Integer idSchedule, Integer idChild) {

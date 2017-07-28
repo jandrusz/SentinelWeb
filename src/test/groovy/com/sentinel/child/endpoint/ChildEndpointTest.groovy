@@ -25,11 +25,11 @@ class ChildEndpointTest extends Specification {
 
     def "should register user"() {
         when:
-        boolean registered = childEndpoint.register(new Child())
+        Child child = childEndpoint.register(new Child())
 
         then:
-        1 * childService.saveChild(_) >> true
-        registered
+        1 * childService.saveChild(_) >> new Child()
+        child != null
     }
 
 

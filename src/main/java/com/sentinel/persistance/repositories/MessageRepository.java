@@ -8,5 +8,9 @@ import javax.transaction.Transactional;
 @Transactional
 public interface MessageRepository extends JpaRepository<Message, Integer> {
 
+    Message getMessageByIdChild(Integer idChild);
+
+    @Override
+    Message save(Message message);
 
 }

@@ -37,7 +37,7 @@ public class UserEndpoint {
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
-    public boolean register(User user) {
+    public User register(User user) {
         return userService.saveUser(user);
     }
 
@@ -59,7 +59,7 @@ public class UserEndpoint {
     }
 
     @RequestMapping(value = "removeChild", method = RequestMethod.POST)
-    public boolean removeChild(User user, Child child) {
+    public boolean removeChildFromObservation(User user, Child child) {
         return monitorService.deleteMonitorByIdUserAndIdChild(user.getIdUser(), child.getIdChild());
     }
 }

@@ -1,19 +1,33 @@
 package com.sentinel.message.endpoint;
 
+import com.sentinel.message.service.MessageService;
+import com.sentinel.persistance.domain.Child;
+import com.sentinel.persistance.domain.Message;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.inject.Inject;
+
+@RestController
+@RequestMapping(value = "message")
 public class MessageEndpoint {
 
-    //    @RequestMapping(value = "/messageReceiver", method = RequestMethod.POST)
-//    public JSONObject saveMessage(@RequestParam("idChild") String idChild, @RequestParam("idUser") String idUser, @RequestParam("message") String message,@RequestParam("time") String time ) {
-//        MessageDAO.saveMessage(idChild,idUser,message,time);
-//        JSONObject obj = new JSONObject();
-//        obj.put("success","Pomyślnie wysłano wiadomość");
-//        return obj;
-//    }
+    private MessageService messageService;
 
-    //
-//    @RequestMapping(value = "/message", method = RequestMethod.POST)
-//    public JSONObject getMessage(@RequestParam("idChild") String idChild) {
-//        return MessageDAO.getMessage(idChild);
-//    }
+    @Inject
+    public MessageEndpoint(MessageService messageService) {
+        this.messageService = messageService;
+    }
+
+    @RequestMapping(value = "saveMessage", method = RequestMethod.POST)
+    public boolean saveMessage(Message message) {
+        return messageService.saveMessage(message);
+    }
+
+    @RequestMapping(value = "getMessage", method = RequestMethod.GET)
+    public Message getMessage(Child child) {
+        return messageService.getMessage(child.getIdChild());
+    }
 
 }

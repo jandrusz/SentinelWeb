@@ -26,4 +26,12 @@ public class ScheduleEntryService {
         return scheduleEntryRepository.getScheduleEntriesByIdSchedule(schedule.getIdSchedule());
     }
 
+    public ScheduleEntry saveScheduleEntryOrUpdate(ScheduleEntry scheduleEntry) { //TODO can be done better
+        try {
+            scheduleEntryRepository.removeScheduleEntryByIdScheduleEntry(scheduleEntry.getIdScheduleEntry());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return scheduleEntryRepository.save(scheduleEntry);
+    }
 }

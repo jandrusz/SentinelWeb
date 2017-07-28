@@ -35,11 +35,11 @@ class UserEndpointTest extends Specification {
 
     def "should register user"() {
         when:
-        boolean registered = userEndpoint.register(new User())
+        User user = userEndpoint.register(new User())
 
         then:
-        1 * userService.saveUser(_) >> true
-        registered
+        1 * userService.saveUser(_) >> new User()
+        user != null
     }
 
     def "should return list of children for user"() {
@@ -68,7 +68,7 @@ class UserEndpointTest extends Specification {
 
     def "should delete bind with child"() {
         when:
-        boolean removed = userEndpoint.removeChild(new User(), new Child())
+        boolean removed = userEndpoint.removeChildFromObservation(new User(), new Child())
 
         then:
         1 * monitorService.deleteMonitorByIdUserAndIdChild(_, _) >> true

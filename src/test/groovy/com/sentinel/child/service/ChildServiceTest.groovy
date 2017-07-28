@@ -77,14 +77,14 @@ class ChildServiceTest extends Specification {
         Child child = new Child(login: Fields.LOGIN, password: Fields.PASSWORD)
 
         when:
-        boolean isSaved = childService.saveChild(child)
+        Child returnedChild = childService.saveChild(child)
 
         then:
-        1 * childRepository.save(_)
-        isSaved
+        1 * childRepository.save(_) >> new Child()
+        returnedChild != null
     }
 
-    def "should not save child"() {
+    def "should not save child"() { //TODO need to check
         given:
         Child child = new Child(login: Fields.LOGIN, password: Fields.PASSWORD)
         childRepository.getChildByLoginAndPassword(_, _) >> new Child()

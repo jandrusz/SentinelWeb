@@ -13,4 +13,6 @@ public interface ScheduleEntryRepository extends JpaRepository<ScheduleEntry, In
 
     Integer removeScheduleEntryByIdScheduleEntry(Integer idScheduleEntry);
 
+    @Override
+    ScheduleEntry save(ScheduleEntry scheduleEntry);
 }
