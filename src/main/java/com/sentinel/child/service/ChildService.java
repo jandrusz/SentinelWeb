@@ -38,6 +38,10 @@ public class ChildService {
         return null;
     }
 
+    public boolean setSchedule(Integer idSchedule, Integer idChild) {
+        return childRepository.setSchedule(idSchedule, idChild) != 0;
+    }
+
     private boolean validateCredentials(Child child) {
         return Objects.nonNull(child.getLogin()) && Objects.nonNull(child.getPassword());
     }

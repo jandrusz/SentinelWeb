@@ -1,6 +1,8 @@
 package com.sentinel.schedule.endpoint;
 
 
+import com.sentinel.child.service.ChildService;
+import com.sentinel.persistance.domain.Child;
 import com.sentinel.persistance.domain.Schedule;
 import com.sentinel.persistance.domain.User;
 import com.sentinel.schedule.service.ScheduleService;
@@ -15,11 +17,14 @@ import java.util.List;
 @RequestMapping(value = "schedule")
 public class ScheduleEndpoint {
 
-    ScheduleService scheduleService;
+    private ScheduleService scheduleService;
+
+    private ChildService childService;
 
     @Inject
-    public ScheduleEndpoint(ScheduleService scheduleService) {
+    public ScheduleEndpoint(ScheduleService scheduleService, ChildService childService) {
         this.scheduleService = scheduleService;
+        this.childService = childService;
     }
 
     @RequestMapping(value = "addSchedule", method = RequestMethod.POST)
@@ -27,10 +32,6 @@ public class ScheduleEndpoint {
         return scheduleService.saveSchedule(schedule);
     }
 
-//        @RequestMapping(value = "scheduleEntries", method = RequestMethod.POST)
-//    public JSONObject getSchedule(@RequestParam("idSchedule") String idSchedule) {
-//        return ScheduleEntryDAO.getScheduleEntriesByScheduleId(idSchedule);
-//    }
 
     @RequestMapping(value = "schedules", method = RequestMethod.POST)
     public List<Schedule> getSchedules(User user) {
@@ -47,21 +48,14 @@ public class ScheduleEndpoint {
         return scheduleService.editName(schedule);
     }
 
-//    @RequestMapping(value = "bindChildToSchedule", method = RequestMethod.POST)
-//    public JSONObject bindChildToSchedule(@RequestParam("idChild") String idChild, @RequestParam("idSchedule") String idSchedule) {
-//        return ChildDAO.bindChildToSchedule(idChild, idSchedule);
-//    }
-//
-//    @RequestMapping(value = "addScheduleEntry", method = RequestMethod.POST)
-//    public JSONObject addOrEditScheduleEntry(@RequestParam("name") String name, @RequestParam("timeStart") String timeStart, @RequestParam("timeStop") String timeStop,
-//                                             @RequestParam("day") String day, @RequestParam("idSchedule") String idSchedule, @RequestParam("idScheduleEntry") String idScheduleEntry,
-//                                             @RequestParam("idArea") String idArea) {
-//        return ScheduleEntryDAO.addOrEditScheduleEntry(name, timeStart, timeStop, day, idSchedule, idScheduleEntry, idArea);
-//    }
-//
-//    @RequestMapping(value = "removeScheduleEntry", method = RequestMethod.POST)
-//    public JSONObject removeScheduleEntry(@RequestParam("scheduleEntryId") String scheduleEntryId) {
-//        return ScheduleEntryDAO.removeScheduleEntry(scheduleEntryId);
-//    }
+    @RequestMapping(value = "childSchedule", method = RequestMethod.POST)
+    public Schedule getSchedule(Child child) {
+        return scheduleService.getScheduleByIdSchedule(child.getIdSchedule());
+    }
+
+    @RequestMapping(value = "bindChildToSchedule", method = RequestMethod.POST)
+    public boolean bindChildToSchedule(Child child, Schedule schedule) {
+        return childService.setSchedule(child.getIdChild(), schedule.getIdSchedule());
+    }
 
 }

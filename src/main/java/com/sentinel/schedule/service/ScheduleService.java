@@ -33,4 +33,8 @@ public class ScheduleService {
         return scheduleRepository.editName(schedule.getIdSchedule(), schedule.getName()) != 0;
     }
 
+    public Schedule getScheduleByIdSchedule(Integer idSchedule) {
+        return scheduleRepository.getScheduleByIdSchedule(idSchedule);
+    }
+
 }

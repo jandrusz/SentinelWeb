@@ -28,21 +28,4 @@ public class ChildEndpoint {
     public boolean register(Child child) {
         return childService.saveChild(child);
     }
-//
-//    @RequestMapping(value = "location/saveLocation", method = RequestMethod.POST)
-//    public JSONObject saveLocation(@RequestParam("longitude") String longitude, @RequestParam("latitude") String latitude, @RequestParam("day") String day,
-//                                   @RequestParam("time") String time, @RequestParam("idChild") String idChild) {
-//        return LocationDAO.saveLocation(longitude, latitude, day, time, idChild);
-//    }
-//
-//    @RequestMapping(value = "/schedules/schedule", method = RequestMethod.POST)
-//    public JSONObject getSchedules(@RequestParam("idChild") String idChild) {
-//        return ScheduleDAO.getScheduleByIdForChild(idChild);
-//    }
-//
-//    @RequestMapping(value = "/message", method = RequestMethod.POST)
-//    public JSONObject getMessage(@RequestParam("idChild") String idChild) {
-//        return MessageDAO.getMessage(idChild);
-//    }
-
 }
