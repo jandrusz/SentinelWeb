@@ -9,7 +9,7 @@ class ChildServiceTest extends Specification {
     ChildRepository childRepository
     ChildService childService
 
-    def setup(){
+    def setup() {
         childRepository = Mock(ChildRepository)
         childService = new ChildService(childRepository)
     }
@@ -77,24 +77,40 @@ class ChildServiceTest extends Specification {
         Child child = new Child(login: Fields.LOGIN, password: Fields.PASSWORD)
 
         when:
-        Child returnedChild = childService.saveChild(child)
+        childService.saveChild(child)
 
         then:
         1 * childRepository.save(_) >> new Child()
-        returnedChild != null
     }
 
-    def "should not save child"() { //TODO need to check
+    def "should not save child"() {
         given:
         Child child = new Child(login: Fields.LOGIN, password: Fields.PASSWORD)
         childRepository.getChildByLoginAndPassword(_, _) >> new Child()
 
         when:
-        boolean isSaved = childService.saveChild(child)
+        childService.saveChild(child)
 
         then:
         0 * childRepository.save(_)
-        !isSaved
+    }
+
+    def "should set schedule for child id"() {
+        when:
+        boolean scheduleSet = childService.setSchedule(1, 1)
+
+        then:
+        1 * childRepository.setSchedule(_, _) >> 1
+        scheduleSet
+    }
+
+    def "should not set schedule for child id"() {
+        when:
+        boolean scheduleSet = childService.setSchedule(1, 1)
+
+        then:
+        1 * childRepository.setSchedule(_, _) >> 0
+        !scheduleSet
     }
 
     class Fields {

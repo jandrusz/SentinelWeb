@@ -1,12 +1,10 @@
 package com.sentinel.user.endpoint;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.inject.Inject;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import com.sentinel.child.service.ChildService;
 import com.sentinel.monitor.service.MonitorService;
 import com.sentinel.persistance.domain.Child;
 import com.sentinel.persistance.domain.Monitor;
@@ -19,14 +17,11 @@ public class UserEndpoint {
 
 	private UserService userService;
 
-	private ChildService childService;
-
 	private MonitorService monitorService;
 
 	@Inject
-	public UserEndpoint(UserService userService, ChildService childService, MonitorService monitorService) {
+	public UserEndpoint(UserService userService, MonitorService monitorService) {
 		this.userService = userService;
-		this.childService = childService;
 		this.monitorService = monitorService;
 	}
 
@@ -42,19 +37,12 @@ public class UserEndpoint {
 
 	@RequestMapping(value = "children", method = RequestMethod.GET)
 	public List<Child> getChildren(User user) {
-		List<Monitor> monitors = monitorService.getMonitorsOfUsersChildren(user.getIdUser());
-		return monitors.stream()
-				.map(m -> childService.getChildByIdChild(m.getIdChild()))
-				.collect(Collectors.toList());
+		return monitorService.getMonitorsOfUsersChildren(user.getIdUser());
 	}
 
 	@RequestMapping(value = "addChild", method = RequestMethod.POST)
-	public Monitor addChild(User user, Child child) {
-		Monitor monitor = Monitor.builder()
-				.idUser(user.getIdUser())
-				.idChild(childService.getChildByLoginAndPassword(child).getIdChild())
-				.build();
-		return monitorService.save(monitor);
+	public Monitor addChildToObservation(User user, Child child) {
+		return monitorService.addChildToObservation(user, child);
 	}
 
 	@RequestMapping(value = "removeChild", method = RequestMethod.POST)
