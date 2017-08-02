@@ -24,7 +24,7 @@ class ScheduleServiceTest extends Specification {
 
     def "should get schedules by user id"() {
         when:
-        List<Schedule> schedules = scheduleService.getSchedulesByIdUser(1)
+        List<Schedule> schedules = scheduleService.getSchedulesByIdUser(Fields.ID_USER)
 
         then:
         1 * scheduleRepository.getSchedulesByIdUser(_) >> [new Schedule(), new Schedule()]
@@ -33,46 +33,53 @@ class ScheduleServiceTest extends Specification {
 
     def "should remove schedule by schedule id"() {
         when:
-        boolean removed = scheduleService.removeScheduleByIdSchedule(1)
+        boolean removed = scheduleService.removeScheduleByIdSchedule(Fields.ID_USER)
 
         then:
-        1 * scheduleRepository.removeScheduleByIdSchedule(_) >> 1
+        1 * scheduleRepository.removeScheduleByIdSchedule(_) >> Fields.SUCCESS_INTEGER
         removed
     }
 
     def "should not remove schedule by schedule id"() {
         when:
-        boolean removed = scheduleService.removeScheduleByIdSchedule(1)
+        boolean removed = scheduleService.removeScheduleByIdSchedule(Fields.ID_USER)
 
         then:
-        1 * scheduleRepository.removeScheduleByIdSchedule(_) >> 0
+        1 * scheduleRepository.removeScheduleByIdSchedule(_) >> Fields.FAIL_INTEGER
         !removed
     }
 
-    def "should edit name od schedule"() {
+    def "should edit name of schedule"() {
         when:
         boolean edited = scheduleService.editName(new Schedule())
 
         then:
-        1 * scheduleRepository.editName(_, _) >> 1
+        1 * scheduleRepository.editName(_, _) >> Fields.SUCCESS_INTEGER
         edited
     }
 
-    def "should not edit name od schedule"() {
+    def "should not edit name of schedule"() {
         when:
         boolean edited = scheduleService.editName(new Schedule())
 
         then:
-        1 * scheduleRepository.editName(_, _) >> 0
+        1 * scheduleRepository.editName(_, _) >> Fields.FAIL_INTEGER
         !edited
     }
 
     def "should get schedule by schedule id"() {
         when:
-        scheduleService.getScheduleByIdSchedule(1)
+        scheduleService.getScheduleByIdSchedule(Fields.ID_USER)
 
         then:
         1 * scheduleRepository.getScheduleByIdSchedule(_)
+    }
+
+
+    class Fields {
+        static final ID_USER = 1
+        static final SUCCESS_INTEGER = 1
+        static final FAIL_INTEGER = 0
     }
 
 }

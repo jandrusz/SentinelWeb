@@ -65,7 +65,7 @@ class ChildServiceTest extends Specification {
 
     def "should get child by id"() {
         when:
-        Child child = childService.getChildByIdChild(0)
+        Child child = childService.getChildByIdChild(Fields.ID_CHILD)
 
         then:
         1 * childRepository.getChildByIdChild(_) >> new Child()
@@ -97,7 +97,7 @@ class ChildServiceTest extends Specification {
 
     def "should set schedule for child id"() {
         when:
-        boolean scheduleSet = childService.setSchedule(1, 1)
+        boolean scheduleSet = childService.setSchedule(Fields.ID_SCHEDULE, Fields.ID_CHILD)
 
         then:
         1 * childRepository.setSchedule(_, _) >> 1
@@ -106,7 +106,7 @@ class ChildServiceTest extends Specification {
 
     def "should not set schedule for child id"() {
         when:
-        boolean scheduleSet = childService.setSchedule(1, 1)
+        boolean scheduleSet = childService.setSchedule(Fields.ID_SCHEDULE, Fields.ID_CHILD)
 
         then:
         1 * childRepository.setSchedule(_, _) >> 0
@@ -114,8 +114,10 @@ class ChildServiceTest extends Specification {
     }
 
     class Fields {
-        private static LOGIN = "login"
-        private static PASSWORD = "password"
+        final static LOGIN = "login"
+        final static PASSWORD = "password"
+        final static ID_SCHEDULE = 1
+        final static ID_CHILD = 1
     }
 
 }

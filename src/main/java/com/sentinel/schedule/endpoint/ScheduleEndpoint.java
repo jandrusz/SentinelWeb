@@ -31,7 +31,6 @@ public class ScheduleEndpoint {
 		return scheduleService.saveSchedule(schedule);
 	}
 
-
 	@RequestMapping(value = "schedules", method = RequestMethod.GET)
 	public List<Schedule> getSchedules(User user) {
 		return scheduleService.getSchedulesByIdUser(user.getIdUser());

@@ -41,9 +41,9 @@ class UserEndpointTest extends Specification {
         List<Child> children = userEndpoint.getChildren(new User())
 
         then: "should call monitorService to get Monitor objects"
-        1 * monitorService.getMonitorsOfUsersChildren(_) >> Lists.newArrayList(new Monitor(), new Monitor())
+        1 * monitorService.getUserChildrenUnderObservation(_) >> Lists.newArrayList(new Monitor(), new Monitor())
 
-        then: "should return list with 2 children"
+        and: "should return list with 2 children"
         children.size() == 2
     }
 

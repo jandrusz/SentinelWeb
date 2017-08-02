@@ -1,6 +1,7 @@
 package com.sentinel.schedule.endpoint
 
 import com.sentinel.child.service.ChildService
+import com.sentinel.persistance.domain.Child
 import com.sentinel.persistance.domain.Schedule
 import com.sentinel.persistance.domain.User
 import com.sentinel.schedule.service.ScheduleService
@@ -18,12 +19,22 @@ class ScheduleEndpointTest extends Specification {
         scheduleEndpoint = new ScheduleEndpoint(scheduleService, childService)
     }
 
-    def "should add schedule"() {
+    def "should return schedule if it was successfully added"() {
         when:
-        scheduleEndpoint.addSchedule(new Schedule())
+        Schedule schedule = scheduleEndpoint.addSchedule(new Schedule())
 
         then:
-        1 * scheduleService.saveSchedule(_)
+        1 * scheduleService.saveSchedule(_) >> new Schedule()
+        schedule
+    }
+
+    def "should not return schedule if it failed to add"() {
+        when:
+        Schedule schedule = scheduleEndpoint.addSchedule(new Schedule())
+
+        then:
+        1 * scheduleService.saveSchedule(_) >> null
+        !schedule
     }
 
     def "should get schedules for user"() {
@@ -35,13 +46,85 @@ class ScheduleEndpointTest extends Specification {
         schedules.size() == 2
     }
 
-    def "should remove schedule"() {
+    def "should not return schedules for user"() {
         when:
-        scheduleEndpoint.remove(new Schedule())
+        List<Schedule> schedules = scheduleEndpoint.getSchedules(new User())
 
         then:
-        1 * scheduleService.removeScheduleByIdSchedule(_)
+        1 * scheduleService.getSchedulesByIdUser(_) >> []
+        schedules.size() == 0
     }
 
-    //TODO add tests
+    def "should return true if schedule was successfully removed"() {
+        when:
+        boolean removed = scheduleEndpoint.remove(new Schedule())
+
+        then:
+        1 * scheduleService.removeScheduleByIdSchedule(_) >> true
+        removed
+    }
+
+    def "should return false if schedule failed to remove"() {
+        when:
+        boolean removed = scheduleEndpoint.remove(new Schedule())
+
+        then:
+        1 * scheduleService.removeScheduleByIdSchedule(_) >> false
+        !removed
+    }
+
+    def "should return true if successfully edited schedule name"() {
+        when:
+        boolean edited = scheduleEndpoint.editScheduleName(new Schedule())
+
+        then:
+        1 * scheduleService.editName(_) >> true
+        edited
+    }
+
+    def "should return false if editing failed"() {
+        when:
+        boolean edited = scheduleEndpoint.editScheduleName(new Schedule())
+
+        then:
+        1 * scheduleService.editName(_) >> false
+        !edited
+    }
+
+    def "should return schedule"() {
+        when:
+        Schedule schedule = scheduleEndpoint.getSchedule(new Child())
+
+        then:
+        1 * scheduleService.getScheduleByIdSchedule(_) >> new Schedule()
+        schedule
+    }
+
+    def "should not return schedule"() {
+        when:
+        Schedule schedule = scheduleEndpoint.getSchedule(new Child())
+
+        then:
+        1 * scheduleService.getScheduleByIdSchedule(_) >> null
+        !schedule
+    }
+
+    def "should return true if successfully set schedule for child"() {
+        when:
+        boolean scheduleSet = scheduleEndpoint.bindChildToSchedule(new Child(), new Schedule())
+
+        then:
+        childService.setSchedule(_, _) >> true
+        scheduleSet
+    }
+
+    def "should return false if unsuccessfully set schedule for child"() {
+        when:
+        boolean scheduleSet = scheduleEndpoint.bindChildToSchedule(new Child(), new Schedule())
+
+        then:
+        childService.setSchedule(_, _) >> false
+        !scheduleSet
+    }
+
 }

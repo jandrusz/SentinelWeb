@@ -23,7 +23,7 @@ public class MonitorService {
 		this.childService = childService;
 	}
 
-	public List<Child> getMonitorsOfUsersChildren(Integer idUser) {
+	public List<Child> getUserChildrenUnderObservation(Integer idUser) {
 		List<Monitor> monitors = monitorRepository.getMonitorsByIdUser(idUser);
 		return monitors.stream()
 				.map(m -> childService.getChildByIdChild(m.getIdChild()))

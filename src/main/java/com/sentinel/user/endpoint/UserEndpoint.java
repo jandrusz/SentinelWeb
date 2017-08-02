@@ -37,7 +37,7 @@ public class UserEndpoint {
 
 	@RequestMapping(value = "children", method = RequestMethod.GET)
 	public List<Child> getChildren(User user) {
-		return monitorService.getMonitorsOfUsersChildren(user.getIdUser());
+		return monitorService.getUserChildrenUnderObservation(user.getIdUser());
 	}
 
 	@RequestMapping(value = "addChild", method = RequestMethod.POST)
