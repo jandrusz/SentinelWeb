@@ -1,4 +1,4 @@
-package com.sentinel.user.service
+package com.sentinel.user
 
 import com.sentinel.persistance.domain.User
 import com.sentinel.persistance.repositories.UserRepository

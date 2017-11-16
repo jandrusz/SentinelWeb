@@ -1,4 +1,4 @@
-package com.sentinel.schedule.service
+package com.sentinel.schedule
 
 import com.sentinel.persistance.domain.Schedule
 import com.sentinel.persistance.repositories.ScheduleRepository

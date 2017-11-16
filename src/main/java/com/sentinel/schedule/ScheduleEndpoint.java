@@ -1,4 +1,4 @@
-package com.sentinel.schedule.endpoint;
+package com.sentinel.schedule;
 
 
 import java.util.List;
@@ -6,11 +6,10 @@ import javax.inject.Inject;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import com.sentinel.child.service.ChildService;
+import com.sentinel.child.ChildService;
 import com.sentinel.persistance.domain.Child;
 import com.sentinel.persistance.domain.Schedule;
 import com.sentinel.persistance.domain.User;
-import com.sentinel.schedule.service.ScheduleService;
 
 @RestController
 @RequestMapping(value = "schedule")

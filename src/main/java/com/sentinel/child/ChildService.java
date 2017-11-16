@@ -1,4 +1,4 @@
-package com.sentinel.child.service;
+package com.sentinel.child;
 
 import java.util.Objects;
 import javax.inject.Inject;

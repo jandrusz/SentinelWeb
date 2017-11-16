@@ -1,4 +1,4 @@
-package com.sentinel.child.service
+package com.sentinel.child
 
 import com.sentinel.persistance.domain.Child
 import com.sentinel.persistance.repositories.ChildRepository

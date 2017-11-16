@@ -1,4 +1,4 @@
-package com.sentinel.schedule.service;
+package com.sentinel.schedule;
 
 import java.util.List;
 import javax.inject.Inject;

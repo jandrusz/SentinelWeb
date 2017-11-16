@@ -1,4 +1,4 @@
-package com.sentinel.message.service;
+package com.sentinel.message;
 
 import java.util.Objects;
 import javax.inject.Inject;

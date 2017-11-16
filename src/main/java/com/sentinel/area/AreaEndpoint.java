@@ -1,10 +1,9 @@
-package com.sentinel.area.endpoint;
+package com.sentinel.area;
 
 import javax.inject.Inject;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import com.sentinel.area.service.AreaService;
 import com.sentinel.persistance.domain.Area;
 
 @RestController

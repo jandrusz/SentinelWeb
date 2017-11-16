@@ -1,10 +1,9 @@
-package com.sentinel.schedule.endpoint
+package com.sentinel.schedule
 
-import com.sentinel.child.service.ChildService
+import com.sentinel.child.ChildService
 import com.sentinel.persistance.domain.Child
 import com.sentinel.persistance.domain.Schedule
 import com.sentinel.persistance.domain.User
-import com.sentinel.schedule.service.ScheduleService
 import spock.lang.Specification
 
 class ScheduleEndpointTest extends Specification {

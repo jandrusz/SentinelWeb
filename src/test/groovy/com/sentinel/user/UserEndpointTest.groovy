@@ -1,11 +1,10 @@
-package com.sentinel.user.endpoint
+package com.sentinel.user
 
 import com.google.common.collect.Lists
-import com.sentinel.monitor.service.MonitorService
+import com.sentinel.monitor.MonitorService
 import com.sentinel.persistance.domain.Child
 import com.sentinel.persistance.domain.Monitor
 import com.sentinel.persistance.domain.User
-import com.sentinel.user.service.UserService
 import spock.lang.Specification
 
 class UserEndpointTest extends Specification {

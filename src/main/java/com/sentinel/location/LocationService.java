@@ -1,4 +1,4 @@
-package com.sentinel.location.service;
+package com.sentinel.location;
 
 import java.util.List;
 import javax.inject.Inject;

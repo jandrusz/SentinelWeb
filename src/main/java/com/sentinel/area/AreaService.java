@@ -1,4 +1,4 @@
-package com.sentinel.area.service;
+package com.sentinel.area;
 
 
 import javax.inject.Inject;

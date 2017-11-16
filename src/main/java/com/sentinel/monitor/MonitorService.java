@@ -1,10 +1,10 @@
-package com.sentinel.monitor.service;
+package com.sentinel.monitor;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.inject.Inject;
 import org.springframework.stereotype.Component;
-import com.sentinel.child.service.ChildService;
+import com.sentinel.child.ChildService;
 import com.sentinel.persistance.domain.Child;
 import com.sentinel.persistance.domain.Monitor;
 import com.sentinel.persistance.domain.User;

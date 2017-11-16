@@ -1,10 +1,9 @@
-package com.sentinel.message.endpoint;
+package com.sentinel.message;
 
 import javax.inject.Inject;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import com.sentinel.message.service.MessageService;
 import com.sentinel.persistance.domain.Child;
 import com.sentinel.persistance.domain.Message;
 

@@ -1,4 +1,4 @@
-package com.sentinel.user.service;
+package com.sentinel.user;
 
 import java.util.Objects;
 import javax.inject.Inject;

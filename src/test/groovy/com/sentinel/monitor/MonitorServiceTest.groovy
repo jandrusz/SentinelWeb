@@ -1,6 +1,6 @@
-package com.sentinel.monitor.service
+package com.sentinel.monitor
 
-import com.sentinel.child.service.ChildService
+import com.sentinel.child.ChildService
 import com.sentinel.persistance.domain.Child
 import com.sentinel.persistance.domain.Monitor
 import com.sentinel.persistance.domain.User

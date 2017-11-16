@@ -1,10 +1,9 @@
-package com.sentinel.child.endpoint;
+package com.sentinel.child;
 
 import javax.inject.Inject;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import com.sentinel.child.service.ChildService;
 import com.sentinel.persistance.domain.Child;
 
 @RestController
